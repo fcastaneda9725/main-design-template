@@ -1,0 +1,266 @@
+/* GENERADO por scripts/generate-tokens.mjs a partir de design-system/tokens.json — no editar a mano.
+ * Regenerar: node scripts/generate-tokens.mjs (o el script npm "tokens" si el proyecto lo define).
+ *
+ * El espaciado no se remapea en @theme: la escala de tokens.json (base 4)
+ * coincide con la escala numérica por defecto de Tailwind 4 (p-4 = 1rem = 16px).
+ *
+ * El tamaño de tipografía responsivo (desktop/mobile) vive en :root como
+ * pares --text-{token}-size / --text-{token}-size-mobile; las clases que
+ * aplican el quiebre responsivo se arman junto con las páginas que las usan.
+ */
+
+:root {
+  /* color — superficie por defecto en todo el producto */
+  --bg-canvas: #FAFAFA;
+  --bg-surface: #FFFFFF;
+  --bg-raised: #FFFFFF;
+  --bg-inset: #F1F1F1;
+  --text-primary: #18181B;
+  --text-body: #3F3F46;
+  --text-muted: #71717A;
+  --text-subtle: #A1A1AA;
+  --text-disabled: #D4D4D8;
+  --border-subtle: #EDEDF0;
+  --border-default: #E4E4E7;
+  --border-strong: #D4D4D8;
+  --brand: #2563EB;
+  --brand-hover: #1D4ED8;
+  --brand-quiet: #DBEAFE;
+  --success: #16A34A;
+  --warning: #D97706;
+  --error: #DC2626;
+  --info: #2563EB;
+  --focus-ring: #2563EB;
+
+  /* escalas numeradas — uso puntual (gradientes, ilustración). Los roles de arriba son la referencia por defecto */
+  --neutral-100: #F1F1F1;
+  --neutral-200: #E4E4E7;
+  --neutral-300: #D4D4D8;
+  --neutral-400: #A1A1AA;
+  --neutral-500: #71717A;
+  --neutral-600: #52525B;
+  --neutral-700: #3F3F46;
+  --neutral-750: #303035;
+  --neutral-800: #27272A;
+  --neutral-850: #1F1F23;
+  --neutral-900: #18181B;
+  --neutral-950: #09090B;
+  --neutral-050: #FAFAFA;
+  --accent-300: #93C5FD;
+  --accent-400: #60A5FA;
+  --accent-500: #3B82F6;
+  --accent-600: #2563EB;
+  --accent-700: #1D4ED8;
+  --accent-800: #1E3A8A;
+
+  /* superficie clara — PDF, email, legales largos. No es un tema claro/oscuro, es una superficie fija para documentos (D09) */
+  --paper: #FFFFFF;
+  --paper-alt: #F8F8F8;
+  --paper-ink: #18181B;
+  --paper-body: #3F3F46;
+  --paper-muted: #71717A;
+  --paper-border: #E4E4E7;
+  --paper-accent-ink: #1D4ED8;
+  --paper-accent-rule: #2563EB;
+
+  /* tipografía */
+  --font-display: ui-serif, Georgia, serif;
+  --font-interface: ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --text-display-1-size: 76px;
+  --text-display-1-size-mobile: 44px;
+  --text-display-1-line-height: 1.02;
+  --text-display-1-tracking: -0.01em;
+  --text-display-2-size: 56px;
+  --text-display-2-size-mobile: 36px;
+  --text-display-2-line-height: 1.06;
+  --text-display-2-tracking: -0.01em;
+  --text-h1-size: 40px;
+  --text-h1-size-mobile: 30px;
+  --text-h1-line-height: 1.12;
+  --text-h1-tracking: 0;
+  --text-h2-size: 30px;
+  --text-h2-size-mobile: 24px;
+  --text-h2-line-height: 1.18;
+  --text-h2-tracking: 0;
+  --text-h3-size: 22px;
+  --text-h3-size-mobile: 20px;
+  --text-h3-line-height: 1.25;
+  --text-h3-tracking: 0;
+  --text-body-lg-size: 18.5px;
+  --text-body-lg-size-mobile: 17px;
+  --text-body-lg-line-height: 1.7;
+  --text-body-lg-tracking: 0;
+  --text-body-size: 15.5px;
+  --text-body-size-mobile: 15.5px;
+  --text-body-line-height: 1.65;
+  --text-body-tracking: 0;
+  --text-body-strong-size: 15.5px;
+  --text-body-strong-size-mobile: 15.5px;
+  --text-body-strong-line-height: 1.5;
+  --text-body-strong-tracking: 0;
+  --text-body-sm-size: 13.5px;
+  --text-body-sm-size-mobile: 13.5px;
+  --text-body-sm-line-height: 1.55;
+  --text-body-sm-tracking: 0;
+  --text-mono-data-size: 15px;
+  --text-mono-data-size-mobile: 15px;
+  --text-mono-data-line-height: 1.4;
+  --text-mono-data-tracking: 0.02em;
+  --text-mono-meta-size: 12px;
+  --text-mono-meta-size-mobile: 12px;
+  --text-mono-meta-line-height: 1.6;
+  --text-mono-meta-tracking: 0.04em;
+  --text-eyebrow-size: 11px;
+  --text-eyebrow-size-mobile: 11px;
+  --text-eyebrow-line-height: 1.4;
+  --text-eyebrow-tracking: 0.26em;
+
+  /* espaciado — base 4, coincide con la escala numérica por defecto de Tailwind 4 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-30: 120px;
+  --space-0-5: 2px;
+
+  /* forma, elevación, capas, quiebres, movimiento */
+  --radius-none: 0px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-full: 999px;
+  --shadow-elev-0: none;
+  --shadow-elev-1: 0 1px 2px rgba(0,0,0,.06);
+  --shadow-elev-2: 0 2px 10px rgba(0,0,0,.10);
+  --shadow-elev-3: 0 18px 48px rgba(0,0,0,.16);
+  --z-base: 0;
+  --z-sticky: 10;
+  --z-dropdown: 20;
+  --z-drawer: 30;
+  --z-modal: 40;
+  --z-toast: 50;
+  --z-tooltip: 60;
+  --z-cookie: 70;
+  --breakpoint-sm: 390px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1440px;
+  --duration-instant: 120ms;
+  --duration-fast: 180ms;
+  --duration-base: 240ms;
+  --duration-slow: 320ms;
+  --ease-standard: cubic-bezier(.2,.6,.2,1);
+  --ease-exit: cubic-bezier(.4,0,1,1);
+
+  /* --- alias de shadcn (D09), fuera del bloque de tokens propios a propósito --- */
+  /* alias de shadcn/ui — derivados de los tokens propios de arriba (D09). No editar: cualquier componente shadcn instalado los consume tal cual */
+  --background: var(--bg-canvas);
+  --foreground: var(--text-primary);
+  --card: var(--bg-surface);
+  --card-foreground: var(--text-primary);
+  --popover: var(--bg-raised);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--brand);
+  --primary-foreground: var(--bg-canvas);
+  --secondary: var(--bg-inset);
+  --secondary-foreground: var(--text-primary);
+  --muted: var(--bg-inset);
+  --muted-foreground: var(--text-muted);
+  --accent: var(--brand-quiet);
+  --accent-foreground: var(--text-primary);
+  --destructive: var(--error);
+  --destructive-foreground: var(--bg-canvas);
+  --border: var(--border-default);
+  --input: var(--border-default);
+  --ring: var(--focus-ring);
+  --radius: var(--radius-md);
+}
+
+@theme inline {
+  /* resetea la paleta y la escala de radios por defecto de Tailwind: todo color y radio sale de tokens.json, nunca de la paleta de Tailwind (D09 / D11) */
+  --color-*: initial;
+  --radius-*: initial;
+
+  /* color — nombres cortos para utilidades propias (bg-canvas, text-primary, border-line...) */
+  --color-canvas: var(--bg-canvas);
+  --color-surface: var(--bg-surface);
+  --color-raised: var(--bg-raised);
+  --color-inset: var(--bg-inset);
+  --color-primary: var(--text-primary);
+  --color-body: var(--text-body);
+  --color-muted: var(--text-muted);
+  --color-subtle: var(--text-subtle);
+  --color-disabled: var(--text-disabled);
+  --color-line-subtle: var(--border-subtle);
+  --color-line: var(--border-default);
+  --color-line-strong: var(--border-strong);
+  --color-accent: var(--brand);
+  --color-accent-hover: var(--brand-hover);
+  --color-accent-quiet: var(--brand-quiet);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-info: var(--info);
+  --color-focus-ring: var(--focus-ring);
+  --color-paper: var(--paper);
+  --color-paper-alt: var(--paper-alt);
+  --color-paper-ink: var(--paper-ink);
+  --color-paper-body: var(--paper-body);
+  --color-paper-muted: var(--paper-muted);
+  --color-paper-border: var(--paper-border);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-750: var(--neutral-750);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-850: var(--neutral-850);
+  --color-neutral-900: var(--neutral-900);
+  --color-neutral-950: var(--neutral-950);
+  --color-neutral-050: var(--neutral-050);
+  --color-accent-300: var(--accent-300);
+  --color-accent-400: var(--accent-400);
+  --color-accent-500: var(--accent-500);
+  --color-accent-600: var(--accent-600);
+  --color-accent-700: var(--accent-700);
+  --color-accent-800: var(--accent-800);
+
+  /* radios — solo los pasos definidos en tokens.json existen como utilidad */
+  --radius-none: var(--radius-none);
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-full: var(--radius-full);
+
+  /* tipografía, quiebres, sombra, easing */
+  --font-display: var(--font-display);
+  --font-interface: var(--font-interface);
+  --font-mono: var(--font-mono);
+  --breakpoint-sm: 390px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1440px;
+  --shadow-elev-0: var(--shadow-elev-0);
+  --shadow-elev-1: var(--shadow-elev-1);
+  --shadow-elev-2: var(--shadow-elev-2);
+  --shadow-elev-3: var(--shadow-elev-3);
+  --ease-standard: var(--ease-standard);
+  --ease-exit: var(--ease-exit);
+}
