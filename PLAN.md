@@ -59,7 +59,7 @@ Frecuencia medida sobre 30 `package.json` de 14 proyectos:
 | UI | shadcn + `cva` + `clsx` + `tailwind-merge` + `lucide` | 5-6 |
 | DB | Neon + Drizzle | 6/6 en lo reciente. Prisma solo en los 3 heredados |
 | Auth | **better-auth** con `drizzleAdapter` | `D05` |
-| Validación | Zod | 8 |
+| Validación | Zod **v4** (`z.treeifyError`, `z.email()`) | 8 — confirmado v4 en `zazpi` |
 | Email | Resend (+ React Email) | 5 |
 | Analítica y errores | PostHog, único proveedor | 3 |
 | Pagos | Stripe + MercadoPago + transferencia manual | 3 |
@@ -111,7 +111,7 @@ Lo invariante entre proyectos no es visual, son **decisiones**.
 
 | Capa | Contiene | Por proyecto |
 |---|---|---|
-| `base` | `env.ts` (Zod), `cn()`, tipo `Result<T>`, `errors/` con códigos de referencia, estados vacío/carga/error, regla de lint anti-paleta-cruda, `AGENTS.md` | idéntico siempre |
+| `base` | `env.ts` (Zod v4), `cn()`, tipo `Result<T>`, código de referencia determinista + captura de errores de servidor, los tres estados de vista (vacío/error/sin permisos), `AGENTS.md` | idéntico siempre |
 | `theme-<cliente>` | paleta, tipografía, radios de *esa* marca | uno por marca |
 | módulos | `db`, `auth`, `email`, `payments`… | à la carte |
 
@@ -348,8 +348,8 @@ se commitea.
 
 | Módulo | Proyectos que ya lo tienen | Primera ronda | Notas |
 |---|---|---|---|
-| `base` | — | ✅ | `env.ts`, `Result<T>`, `errors/`, estados, lint, `AGENTS.md` |
-| `tokens` | `zazpi` (maduro) | ✅ | generador + alias shadcn + test de drift |
+| `base` | — | ✅ **construido** | `env.ts` (Zod v4), `Result<T>`, código de referencia, `instrumentation.ts`, estados, `AGENTS.md` |
+| `tokens` | `zazpi` (maduro) | ✅ **construido** | generador + alias shadcn + test de drift |
 | `db` | 6 | ✅ | Neon + Drizzle + `drizzle.config.ts` |
 | `auth` | 5 | ✅ | better-auth + `drizzleAdapter`. Solo cableado |
 | `email` | 5 | ✅ | Resend + React Email, plantilla base bilingüe |
@@ -422,17 +422,28 @@ main-design-template/
 
 ## 8. Primera ronda — tareas concretas
 
-1. `git init` + repo en GitHub (privado).
-2. `npx shadcn@latest init --template next -d` en este directorio. Corregir de
-   inmediato el bug conocido de Tailwind v4: `init` puede escribir
-   `--font-sans: var(--font-sans)` en `@theme inline`, que es una autorreferencia
-   circular. Usar nombres literales de familia y mover las clases de fuente de
-   `<body>` a `<html>`.
-3. **`tokens`** — extraer de `zazpi`: `design-system/tokens.json`,
-   `scripts/generate-tokens.mjs`, `scripts/lib/build-tokens-css.mjs` (178 líneas en
-   total), `tests/tokens.test.ts`. Agregar la emisión de alias de shadcn (`D09`).
-4. **`base`** — `env.ts` con Zod, `Result<T>`, `errors/` con códigos de referencia,
-   estados vacío/carga/error, regla de lint anti-paleta-cruda, `AGENTS.md` plantilla.
+1. ✅ `git init`. Falta: repo en GitHub (privado).
+2. ⚠️ **Pendiente — hueco conocido.** `npx shadcn@latest init --template next -d`
+   en este directorio, para que el repo sea la app Next.js real que compila
+   (corolario de `D02`). `tokens` y `base` se construyeron y verificaron de forma
+   aislada (typecheck + vitest en un scratch con las mismas versiones que
+   `zazpi`: Next 16.3.6, Zod v4, React 19), no todavía dentro de una app real de
+   este repo. Corregir el bug conocido de Tailwind v4 al correr `init`:
+   puede escribir `--font-sans: var(--font-sans)` en `@theme inline`, que es una
+   autorreferencia circular. Usar nombres literales de familia y mover las
+   clases de fuente de `<body>` a `<html>`.
+3. ✅ **`tokens`** — construido. Extraído de `zazpi`
+   (`design-system/tokens.json`, `scripts/generate-tokens.mjs`,
+   `scripts/lib/build-tokens-css.mjs`, `tests/tokens.test.ts`) y generalizado con
+   valores placeholder + alias de shadcn (`D09`). Test de drift corrido de verdad
+   (pasa en limpio, falla con un cambio manual sin regenerar).
+4. ✅ **`base`** — construido. `lib/env.ts` (Zod v4), `lib/result.ts`,
+   `lib/errors/reference-code.ts` + `instrumentation.ts` + `app/error.tsx`
+   (comparten el mismo código de referencia sin transportar estado),
+   `components/states/{empty,error,forbidden}-state.tsx` (sobre `Button` de
+   shadcn vía `registryDependencies` — primera comprobación real de `D02`),
+   `AGENTS.md` plantilla híbrida (`D04`). Typecheck estricto verificado con las
+   versiones reales de `zazpi`.
 5. **`db`** — Neon + Drizzle + `drizzle.config.ts` + convención de un archivo por
    tabla en `db/schema/`.
 6. **`auth`** — **fusionar `solvo` + `landing-golf`**. Ninguno de los dos archivos es

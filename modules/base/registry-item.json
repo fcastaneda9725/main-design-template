@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "base",
+  "type": "registry:base",
+  "title": "Base",
+  "description": "Núcleo invariante de todo proyecto: env.ts con Zod, cn(), tipo Result<T>, código de referencia determinista para errores, captura de errores de servidor (instrumentation.ts), los tres estados obligatorios de vista (vacío/error/sin permisos) y AGENTS.md con las convenciones del kit más encabezados TODO(proyecto) para lo específico del cliente. No hornea paleta — eso es el módulo `theme-<cliente>`.",
+  "dependencies": ["zod@^4", "clsx", "tailwind-merge", "nanoid"],
+  "registryDependencies": ["button"],
+  "files": [
+    { "path": "files/lib/utils.ts", "target": "lib/utils.ts", "type": "registry:file" },
+    { "path": "files/lib/result.ts", "target": "lib/result.ts", "type": "registry:file" },
+    { "path": "files/lib/env.ts", "target": "lib/env.ts", "type": "registry:file" },
+    { "path": "files/lib/errors/reference-code.ts", "target": "lib/errors/reference-code.ts", "type": "registry:file" },
+    { "path": "files/instrumentation.ts", "target": "instrumentation.ts", "type": "registry:file" },
+    { "path": "files/components/states/empty-state.tsx", "target": "components/states/empty-state.tsx", "type": "registry:component" },
+    { "path": "files/components/states/error-state.tsx", "target": "components/states/error-state.tsx", "type": "registry:component" },
+    { "path": "files/components/states/forbidden-state.tsx", "target": "components/states/forbidden-state.tsx", "type": "registry:component" },
+    { "path": "files/app/error.tsx", "target": "app/error.tsx", "type": "registry:page" },
+    { "path": "files/AGENTS.md", "target": "AGENTS.md", "type": "registry:file" }
+  ]
+}
