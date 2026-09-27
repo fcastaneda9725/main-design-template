@@ -186,6 +186,7 @@
   --input: var(--border-default);
   --ring: var(--focus-ring);
   --radius: var(--radius-md);
+  --font-heading: var(--font-display);
 }
 
 @theme inline {

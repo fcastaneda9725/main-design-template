@@ -40,7 +40,9 @@
   barrera.
 - Nada de paleta cruda de Tailwind (`bg-red-600`, `text-blue-500`…). El módulo
   `tokens` resetea `--color-*` en `@theme inline`, así que esas clases no
-  compilan — es un error de build, no una convención.
+  existen — Tailwind no genera ninguna regla para ellas (verificado: el build
+  compila sin error, pero el elemento queda sin ese color, visualmente roto).
+  No es una convención que se pueda ignorar en silencio, se nota en pantalla.
 - Todo texto visible sale de un solo lugar (i18n si el proyecto lo tiene,
   constantes si no) — nunca hardcodeado disperso en componentes.
 - Commits convencionales (`feat:`, `fix:`, `chore:`).
@@ -83,7 +85,7 @@ components/
   states/                # EmptyState, ErrorState, ForbiddenState (base)
   domain/                # componentes propios del dominio de este proyecto
 lib/
-  utils.ts               # cn() (base)
+  utils.ts               # cn() — de `shadcn init`, no del kit
   result.ts              # Result<T> (base)
   env.ts                 # validación de entorno con Zod (base)
   errors/                # reference-code.ts (base)
@@ -117,3 +119,11 @@ qué se decidió explícitamente no construir todavía, para que nadie lo asuma.
 <!-- TODO(proyecto): Pendientes del cliente —
 qué falta confirmar (textos legales, dominios, cuentas de cobro...) y qué valor
 placeholder se usa mientras tanto. Marcar en el código con `// TODO(cliente):`. -->
+
+---
+
+<!-- BEGIN:nextjs-agent-rules -->
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+<!-- END:nextjs-agent-rules -->

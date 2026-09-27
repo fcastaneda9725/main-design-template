@@ -5,10 +5,13 @@ import { join } from "node:path";
 import { buildTokensCss } from "../scripts/lib/build-tokens-css.mjs";
 import tokens from "../design-system/tokens.json";
 
-describe("design-system/tokens.json → src/styles/tokens.css", () => {
+// Ruta alineada con OUT_PATH en scripts/generate-tokens.mjs — si ese script
+// cambia de destino (p. ej. a src/styles/tokens.css en un proyecto con src/),
+// esta ruta se actualiza igual.
+describe("design-system/tokens.json → styles/tokens.css", () => {
   it("el CSS commiteado es exactamente el que generaría scripts/generate-tokens.mjs hoy", () => {
     const committed = readFileSync(
-      join(__dirname, "../src/styles/tokens.css"),
+      join(__dirname, "../styles/tokens.css"),
       "utf8",
     );
     const regenerated = buildTokensCss(tokens);

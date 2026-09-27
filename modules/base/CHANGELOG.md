@@ -27,3 +27,11 @@ Solo las dos primeras justifican interrumpir un proyecto que ya lo tiene instala
 - **feat** `components/states/*` usan `Button` de shadcn vía
   `registryDependencies`, no un botón propio — primera comprobación real de que
   el registro puede arrastrar componentes oficiales en la misma instalación (D02).
+- **chore** (encontrado al scaffoldear un proyecto real por primera vez)
+  `base` traía su propio `lib/utils.ts` (`cn()` con `clsx`+`tailwind-merge`,
+  igual en los 18 proyectos auditados). El CLI actual de shadcn (v4.21) ya
+  escribe `lib/utils.ts` como `export { cn } from "cn"` al correr `init` —
+  dos archivos distintos compitiendo por la misma ruta. Como `/main-design-start`
+  siempre corre `shadcn init` antes de instalar `base`, se quitó el `lib/utils.ts`
+  propio y las dependencias `clsx`/`tailwind-merge`: `base` ahora asume que
+  `cn()` ya existe cuando se instala.

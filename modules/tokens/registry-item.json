@@ -3,33 +3,13 @@
   "name": "tokens",
   "type": "registry:base",
   "title": "Tokens",
-  "description": "Generador de design tokens (D09/D10): design-system/tokens.json es la fuente única, agnóstica de plataforma. Emite src/styles/tokens.css con los tokens propios, una capa de alias de shadcn derivada (nunca al revés), y un reset de la paleta y radios por defecto de Tailwind. Incluye el test de drift que falla si el CSS commiteado no coincide con lo que generaría el script hoy.",
+  "description": "Generador de design tokens (D09/D10): design-system/tokens.json es la fuente única, agnóstica de plataforma. Emite styles/tokens.css con los tokens propios, una capa de alias de shadcn derivada (nunca al revés), y un reset de la paleta y radios por defecto de Tailwind. Incluye el test de drift que falla si el CSS commiteado no coincide con lo que generaría el script hoy.",
   "devDependencies": ["vitest"],
   "files": [
-    {
-      "path": "files/design-system/tokens.json",
-      "target": "design-system/tokens.json",
-      "type": "registry:file"
-    },
-    {
-      "path": "files/scripts/generate-tokens.mjs",
-      "target": "scripts/generate-tokens.mjs",
-      "type": "registry:file"
-    },
-    {
-      "path": "files/scripts/lib/build-tokens-css.mjs",
-      "target": "scripts/lib/build-tokens-css.mjs",
-      "type": "registry:file"
-    },
-    {
-      "path": "files/src/styles/tokens.css",
-      "target": "src/styles/tokens.css",
-      "type": "registry:file"
-    },
-    {
-      "path": "files/tests/tokens.test.ts",
-      "target": "tests/tokens.test.ts",
-      "type": "registry:file"
-    }
+    { "path": "design-system/tokens.json", "target": "design-system/tokens.json", "type": "registry:file" },
+    { "path": "scripts/generate-tokens.mjs", "target": "scripts/generate-tokens.mjs", "type": "registry:file" },
+    { "path": "scripts/lib/build-tokens-css.mjs", "target": "scripts/lib/build-tokens-css.mjs", "type": "registry:file" },
+    { "path": "styles/tokens.css", "target": "styles/tokens.css", "type": "registry:file" },
+    { "path": "tests/tokens.test.ts", "target": "tests/tokens.test.ts", "type": "registry:file" }
   ]
 }

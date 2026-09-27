@@ -168,8 +168,19 @@ function shadcnAliasBlock() {
   l.push(line("--input", "var(--border-default)"));
   l.push(line("--ring", "var(--focus-ring)"));
   l.push(line("--radius", "var(--radius-md)"));
+  l.push(line("--font-heading", "var(--font-display)"));
   return l.join("\n");
 }
+
+// No aliasados todavía (D09, verificado contra la salida real de
+// `shadcn init` v4.21): --chart-1..5 (paleta categórica para gráficas — es su
+// propio problema de diseño, ver la skill `dataviz`) y --sidebar* (superficie
+// dedicada de navegación lateral). Tampoco existen los pasos de radio
+// --radius-xl/2xl/3xl/4xl que el CLI deriva multiplicando --radius: este
+// generador usa una escala fija y explícita en su lugar (D09/D11 — "esquinas
+// rectas por defecto", decisión de `zazpi`). Si un componente de shadcn
+// instalado después usa `rounded-xl` o superior y se ve sin radio, agregar ese
+// paso a `tokens.json` → `radius`, no adivinar aquí.
 
 export function buildTokensCss(tokens) {
   return `/* GENERADO por scripts/generate-tokens.mjs a partir de design-system/tokens.json — no editar a mano.

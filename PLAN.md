@@ -243,10 +243,13 @@ Ese test de drift impide editar a mano un CSS generado. Se conserva.
 design system propio de un cliente.
 
 El generador emite `--color-*: initial; --radius-*: initial;` al abrir `@theme
-inline` (verificado en `zazpi/src/styles/tokens.css:169-170`): borra la paleta y la
-escala de radios por defecto de Tailwind antes de declarar las propias. Es lo que
-hace que la regla de "cero paleta cruda" de `D11` sea un error de compilación y no
-una convención de prosa.
+inline` (verificado en `zazpi/src/styles/tokens.css:169-170`, y confirmado con un
+build real: `bg-red-600` forzado en una página compila sin error pero Tailwind no
+genera ninguna regla para esa clase — el elemento queda visiblemente sin color, no
+hay error de CI). Borra la paleta y la escala de radios por defecto de Tailwind
+antes de declarar las propias. Es lo que hace que la regla de "cero paleta cruda"
+de `D11` se note de inmediato en pantalla en vez de perderse como convención de
+prosa — no es, con precisión, un error de build.
 
 `/main-design-tokens` (parte de la skill de arranque) lee el export `.dc.html` y
 produce el `tokens.json`. Hoy ese paso es manual y es donde se pierde fidelidad entre
@@ -274,8 +277,10 @@ de una vez completo.
 > paleta cruda**, mientras `zazpi/CLAUDE.md` exige "nunca se hardcodea en el
 > componente". La regla existe y nada la hace cumplir. `zazpi` sí la hace cumplir,
 > pero no con lint: con `--color-*: initial;` en `@theme inline` (ver `D09`/`D10`),
-> que borra la paleta por defecto de Tailwind entera. `bg-red-600` deja de compilar,
-> no solo de recomendarse. Ese mecanismo se adopta en `tokens`, no un ESLint aparte.
+> que borra la paleta por defecto de Tailwind entera. `bg-red-600` deja de existir
+> como clase (confirmado con un build real: compila, pero Tailwind no genera la
+> regla y el elemento queda sin color) — se nota en pantalla, no solo se recomienda
+> en prosa. Ese mecanismo se adopta en `tokens`, no un ESLint aparte.
 
 `auth` **no** trae pantallas (decisión explícita): el login depende de la marca.
 
@@ -398,24 +403,52 @@ Reglas:
 
 ## 7. Estructura del repo
 
+Revisado tras scaffoldear el proyecto real (§8, tarea 2): **no hay una carpeta
+`modules/*/files/`**. Eso habría duplicado cada archivo (una copia viva en la app,
+otra en `modules/`), justo el tipo de fuente-de-verdad-doble que este kit existe
+para evitar. El patrón real, tomado de la documentación oficial de registro de
+shadcn: la app es la única fuente, y `registry-item.json` de cada módulo apunta a
+las rutas reales de la app. `modules/<nombre>/` es metadata pura:
+`registry-item.json` + `CHANGELOG.md` + `SKILL.md`, nada de código.
+
 ```
 main-design-template/
   PLAN.md                      # este documento
-  AGENTS.md                    # instrucciones para agentes que trabajen EN el kit
-  registry.json                # generado desde modules/*/registry-item.json
-  app/                         # app Next.js real: aquí se desarrollan y prueban los módulos
-  modules/                     # fuente de cada módulo
+  AGENTS.md                    # convenciones del kit (D04) + bloque autogenerado de Next
+  package.json / tsconfig.json / components.json / next.config.ts / ...
+
+  app/                         # Next.js real — compila, no es una copia de referencia
+  components/
+    ui/                        # shadcn (button, ...)
+    states/                    # empty/error/forbidden-state.tsx (base)
+  lib/
+    utils.ts                   # cn() — de `shadcn init`, no del kit
+    result.ts / env.ts / errors/   (base)
+  design-system/tokens.json    # fuente de tokens (tokens)
+  scripts/                     # generador de tokens (tokens)
+  styles/tokens.css            # generado, no editar a mano (tokens)
+  tests/tokens.test.ts         # test de drift (tokens)
+  instrumentation.ts           # captura de errores de servidor (base)
+
+  modules/                     # METADATA de cada módulo, no código
+    tokens/  { registry-item.json, CHANGELOG.md, SKILL.md }
+    base/    { registry-item.json, CHANGELOG.md, SKILL.md }
+    ...
+
   themes/
-    <cliente>/tokens.json
+    <cliente>/tokens.json       # cuando haya más de un cliente/marca
+
   .claude-plugin/
-    marketplace.json           # canal de skills
+    marketplace.json            # canal de skills
   plugins/main-design/
     skills/
       main-design-start/
       main-design-add/
       main-design-extract/
       main-design-audit/
-  public/r/                    # salida de `npx shadcn build` (generado)
+
+  registry.json                 # generado desde modules/*/registry-item.json
+  public/r/                     # salida de `npx shadcn build` (generado, no se versiona)
 ```
 
 ---
@@ -423,27 +456,63 @@ main-design-template/
 ## 8. Primera ronda — tareas concretas
 
 1. ✅ `git init`. Falta: repo en GitHub (privado).
-2. ⚠️ **Pendiente — hueco conocido.** `npx shadcn@latest init --template next -d`
-   en este directorio, para que el repo sea la app Next.js real que compila
-   (corolario de `D02`). `tokens` y `base` se construyeron y verificaron de forma
-   aislada (typecheck + vitest en un scratch con las mismas versiones que
-   `zazpi`: Next 16.3.6, Zod v4, React 19), no todavía dentro de una app real de
-   este repo. Corregir el bug conocido de Tailwind v4 al correr `init`:
-   puede escribir `--font-sans: var(--font-sans)` en `@theme inline`, que es una
-   autorreferencia circular. Usar nombres literales de familia y mover las
-   clases de fuente de `<body>` a `<html>`.
-3. ✅ **`tokens`** — construido. Extraído de `zazpi`
+2. ✅ **Cerrado.** `npx shadcn@latest init --template next -d --base radix -n
+   main-design-template` (en scratch, luego movido a la raíz sin anidar — `init`
+   crea una subcarpeta con el nombre del proyecto, incluso si coincide con el
+   directorio actual). Hallazgos reales de correr esto, no hipótesis de la
+   documentación:
+   - **`--base` importa: sin especificarlo, el CLI instala `@base-ui/react`
+     (Base UI), no Radix.** De los 18 proyectos auditados, solo `solvo` usa
+     Radix (13 paquetes `@radix-ui/react-*`) y ninguno usa Base UI. Se fijó
+     `--base radix` explícitamente — la evidencia del portafolio manda sobre
+     el default del CLI.
+   - **El bug del `--font-sans` circular no aplica a este flujo.** Se verificó
+     compilando de verdad (`next build` + inspección del CSS/HTML generado):
+     `next/font` inyecta `--font-sans` con un valor real en la misma clase que
+     se aplica a `<html>`, y `@theme inline` lo referencia correctamente
+     (`inline` en Tailwind v4 difiere la resolución a runtime — lo contrario de
+     lo que decía la documentación cargada). El bug ocurre al correr `init`
+     sobre un `layout.tsx` YA EXISTENTE que no usa ese mismo nombre de
+     variable, no en un scaffold nuevo. Sin acción, dato corregido.
+   - **`cn()` cambió de implementación.** El CLI actual (`shadcn@4.21`) escribe
+     `lib/utils.ts` como `export { cn } from "cn"` (paquete npm), no
+     `clsx`+`tailwind-merge` como en los 18 proyectos. `base` tenía su propio
+     `lib/utils.ts` compitiendo por la misma ruta — se quitó el de `base` (ver
+     `modules/base/CHANGELOG.md`).
+   - **Conflicto real con `tokens`:** el scaffold trae `next-themes` +
+     `ThemeProvider` (toggle claro/oscuro por clase, atajo de teclado). `tokens`
+     asume un solo tema por marca (D03). Se quitaron ambos del proyecto de
+     referencia (ver `modules/tokens/CHANGELOG.md`).
+   - **`tokens.json`/`generate-tokens.mjs` asumían `src/`** (estructura de
+     `zazpi`). Este scaffold no usa `src/` — corregido a `styles/tokens.css` en
+     la raíz, con el generador comentando cómo ajustarlo si el proyecto sí usa
+     `src/`.
+   - Verificado con un build real, no solo típico: `bg-red-600` forzado en una
+     página compila sin error pero Tailwind no genera ninguna regla para esa
+     clase — confirma el mecanismo de `D09`/`D11`, y corrigió la redacción
+     ("no es un error de build", como se documentó antes en varios lugares).
+   - `npm run lint` falla con un error interno de ESLint 10 +
+     `eslint-plugin-react` (`contextOrFilename.getFilename is not a function`)
+     — confirmado que ocurre también en `app/page.tsx`, generado por el
+     scaffold sin tocar. Es una incompatibilidad de versiones del propio
+     scaffold de shadcn/Next, no algo introducido por `tokens`/`base`. No se
+     parcheó (fuera de alcance de esta tarea) — build, typecheck y vitest sí
+     pasan limpios, y son la verificación que importa para los módulos.
+3. ✅ **`tokens`** — construido e integrado en la app real. Extraído de `zazpi`
    (`design-system/tokens.json`, `scripts/generate-tokens.mjs`,
    `scripts/lib/build-tokens-css.mjs`, `tests/tokens.test.ts`) y generalizado con
-   valores placeholder + alias de shadcn (`D09`). Test de drift corrido de verdad
-   (pasa en limpio, falla con un cambio manual sin regenerar).
-4. ✅ **`base`** — construido. `lib/env.ts` (Zod v4), `lib/result.ts`,
-   `lib/errors/reference-code.ts` + `instrumentation.ts` + `app/error.tsx`
-   (comparten el mismo código de referencia sin transportar estado),
-   `components/states/{empty,error,forbidden}-state.tsx` (sobre `Button` de
-   shadcn vía `registryDependencies` — primera comprobación real de `D02`),
-   `AGENTS.md` plantilla híbrida (`D04`). Typecheck estricto verificado con las
-   versiones reales de `zazpi`.
+   valores placeholder + alias de shadcn (`D09`, + `--font-heading` agregado al
+   integrar). Test de drift corrido dentro de la app real con `npm run test`
+   (pasa en limpio, falla con un cambio manual sin regenerar). El reset de
+   paleta cruda confirmado con un build real, no solo leído en la fuente.
+4. ✅ **`base`** — construido e integrado en la app real. `lib/env.ts` (Zod v4),
+   `lib/result.ts`, `lib/errors/reference-code.ts` + `instrumentation.ts` +
+   `app/error.tsx` (comparten el mismo código de referencia sin transportar
+   estado), `components/states/{empty,error,forbidden}-state.tsx` (sobre
+   `Button` de shadcn vía `registryDependencies` — primera comprobación real de
+   `D02`), `AGENTS.md` fusionado con el bloque autogenerado de Next (`D04`).
+   `npm run build` + `tsc --noEmit` limpios sobre el conjunto completo
+   (scaffold + tokens + base), no solo cada módulo por separado.
 5. **`db`** — Neon + Drizzle + `drizzle.config.ts` + convención de un archivo por
    tabla en `db/schema/`.
 6. **`auth`** — **fusionar `solvo` + `landing-golf`**. Ninguno de los dos archivos es
