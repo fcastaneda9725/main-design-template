@@ -11,11 +11,28 @@
 // en emails, webhooks y redirects).
 import { z } from "zod";
 
+// kit: email@1
+// Resend acepta dos formas en el remitente: "correo@dominio" y
+// "Nombre <correo@dominio>". La segunda es la que ve el destinatario, así que
+// se valida solo la dirección adentro, no la cadena completa — `z.email()` a
+// secas rechazaría el nombre visible.
+const emailFrom = z.string().refine(
+  (value) => {
+    const withDisplayName = value.match(/^[^<>]*<([^<>]+)>$/);
+    const address = (withDisplayName ? withDisplayName[1] : value).trim();
+    return z.email().safeParse(address).success;
+  },
+  { message: "Debe ser 'correo@dominio' o 'Nombre <correo@dominio>'" },
+);
+
 const serverSchema = z.object({
   // kit: db@1
   DATABASE_URL: z.string().url(),
   // kit: auth@1
   BETTER_AUTH_SECRET: z.string().min(32, "Genera uno con: openssl rand -base64 32"),
+  // kit: email@1
+  RESEND_API_KEY: z.string().min(1),
+  EMAIL_FROM: emailFrom,
 });
 
 const clientSchema = z.object({

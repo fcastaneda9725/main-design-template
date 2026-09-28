@@ -357,7 +357,7 @@ se commitea.
 | `tokens` | `zazpi` (maduro) | ✅ **construido** | generador + alias shadcn + test de drift |
 | `db` | 6 | ✅ **construido** | Neon + Drizzle (`neon-http`), un archivo por tabla |
 | `auth` | 5 | ✅ **construido** | better-auth + `drizzleAdapter`, `admin()`. Solo cableado |
-| `email` | 5 | ✅ | Resend + React Email, plantilla base bilingüe |
+| `email` | 5 | ✅ **construido** | Resend + React Email, `BaseEmailLayout` + `ResetPasswordEmail` |
 | `payments` | 3 | — | interfaz `PaymentProvider` + stripe + mercadopago + transferencia manual |
 | `storage` | 3 | — | interfaz delgada, R2 + Vercel Blob, URLs firmadas |
 | `analytics` | 3 | — | PostHog + banner de consentimiento + `maskAllInputs` |
@@ -561,8 +561,30 @@ main-design-template/
    - Verificado con dos casos negativos reales (quitar `BETTER_AUTH_SECRET`
      rompe el build con el mensaje esperado; `db:generate` con el schema
      instalado produce SQL válido), no solo el camino feliz.
-7. **`email`** — Resend + React Email, plantilla base bilingüe 600px sin depender de
-   fuentes web.
+7. ✅ **`email`** — construido e integrado, **cierra la primera ronda**. Resend
+   + React Email, `BaseEmailLayout` (600px, sin fuentes web, lee
+   `design-system/tokens.json` como JSON directo — los clientes de correo no
+   soportan `var(--...)` de forma confiable) y `ResetPasswordEmail`.
+   - `sendEmail()` fusiona el singleton lazy de `zazpi` con el chequeo
+     `{ data, error }` de `landing-golf` (Resend nunca lanza en fallos de la
+     API). Verificado contra la API real de Resend, no un mock: una llave
+     inválida de prueba devolvió el error correctamente en vez de reportar
+     éxito.
+   - **Cierra el enlace pendiente de `auth`**: el stub `sendResetPasswordEmail`
+     ahora llama a `render()` + `sendEmail()` de verdad. Verificado con
+     `next dev` real (no solo build): HTML válido generado, URL de reset
+     intacta, llamada real a Resend.
+   - Gotcha real de `zazpi` documentado y aplicado: `render()` viene de
+     `"react-email"` (el paquete unificado v6), nunca del parámetro `react:`
+     de Resend, que depende de `@react-email/render` instalado aparte — no
+     está instalado, así que ese atajo rompería en runtime.
+   - `react-email` va en `dependencies`, no `devDependencies` — se usa en
+     runtime, no solo para la preview en el navegador. Confirmado contra el
+     `package.json` real de `zazpi`.
+
+   Con esto, **los 5 módulos de la primera ronda están construidos**
+   (`tokens`, `base`, `db`, `auth`, `email`). Sigue la tarea 10: validar en un
+   proyecto real antes de agregar cualquier módulo nuevo.
 8. Las 4 skills (`D08`) + `marketplace.json`.
 9. Publicar en Vercel con `REGISTRY_TOKEN`.
 10. **Validar en el siguiente proyecto real**, no antes de eso.

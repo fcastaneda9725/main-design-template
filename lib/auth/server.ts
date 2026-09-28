@@ -3,21 +3,41 @@ import { betterAuth } from "better-auth";
 import { admin } from "better-auth/plugins";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { hashPassword } from "@better-auth/utils/password";
+import { render } from "react-email";
 import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { user, session, account, verification } from "@/db/schema/auth";
 import { env } from "@/lib/env";
 import { ok, err, type Result } from "@/lib/result";
+import { sendEmail } from "@/lib/email/server";
+import { ResetPasswordEmail } from "@/emails/reset-password";
 
-// Reemplazar el cuerpo de esta función por el envío real cuando se instale el
-// módulo `email` — no duplicar este archivo ni envolverlo desde otro lado
-// (mismo patrón que `instrumentation.ts` usa para `analytics`).
+// kit: email@1 — conectado con el módulo `email`. Si `email` no está
+// instalado todavía, quitar este import y volver al stub de `console.log`
+// (ver `modules/auth/CHANGELOG.md` v1 para el texto original).
 async function sendResetPasswordEmail(args: {
   email: string;
   name: string;
   resetUrl: string;
 }) {
-  console.log("[auth] enviar email de reset (stub, instalar `email`):", args);
+  const html = await render(
+    ResetPasswordEmail({
+      resetUrl: args.resetUrl,
+      // TODO(proyecto): nombre de marca real — placeholder mientras no hay
+      // uno definido.
+      brandName: "Tu cuenta",
+    }),
+  );
+
+  const result = await sendEmail({
+    to: args.email,
+    subject: "Recupera tu contraseña",
+    html,
+  });
+
+  if (!result.ok) {
+    console.error("[auth] no se pudo enviar el correo de reset:", result.error);
+  }
 }
 
 // Admin/webhook-triggered: dispara el flujo de reset de better-auth y captura

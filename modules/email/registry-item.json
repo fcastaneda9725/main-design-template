@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "email",
+  "type": "registry:base",
+  "title": "Email",
+  "description": "Resend + React Email. sendEmail() envuelve resend.emails.send() con el chequeo de {data,error} que Resend nunca lanza en fallos de la API. BaseEmailLayout lee design-system/tokens.json directo (color.paper.*), no CSS — los clientes de correo no soportan var(--...) de forma confiable. Incluye ResetPasswordEmail y conecta el stub de sendResetPasswordEmail en lib/auth/server.ts si `auth` está instalado.",
+  "registryDependencies": [],
+  "dependencies": ["resend@^4.8.0", "react-email@6.11.0", "server-only@^0.0.1"],
+  "files": [
+    { "path": "lib/email/server.ts", "target": "lib/email/server.ts", "type": "registry:file" },
+    { "path": "emails/base-layout.tsx", "target": "emails/base-layout.tsx", "type": "registry:file" },
+    { "path": "emails/reset-password.tsx", "target": "emails/reset-password.tsx", "type": "registry:file" }
+  ]
+}
