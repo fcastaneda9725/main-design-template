@@ -19,9 +19,9 @@
 | Hosting | Vercel |
 | Gestor de paquetes | el que ya tenga el proyecto (lockfile existente) — el kit es agnóstico |
 
-Instalados en este proyecto: `base`, `tokens`, `db`.
+Instalados en este proyecto: `base`, `tokens`, `db`, `auth`.
 
-<!-- TODO(proyecto): módulos adicionales — auth, email, payments, storage, analytics, i18n, flow-*. Listar aquí conforme se agregan con /main-design-add. -->
+<!-- TODO(proyecto): módulos adicionales — email, payments, storage, analytics, i18n, flow-*. Listar aquí conforme se agregan con /main-design-add. -->
 
 ## Convenciones
 

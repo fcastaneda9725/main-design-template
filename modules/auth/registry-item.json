@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "auth",
+  "type": "registry:base",
+  "title": "Auth",
+  "description": "better-auth + drizzleAdapter, solo cableado (sin UI de login/registro — eso depende de la marca). Email+password con el plugin admin() para roles. sendResetPassword construye el link directo con el token crudo, no la URL de better-auth, para evitar que quede atrapado en el frame sandboxed de clientes de correo. Requiere `db`. El envío real del correo de reset es un stub hasta que se instale `email`.",
+  "registryDependencies": ["db"],
+  "dependencies": ["better-auth@1.6.22", "@better-auth/utils@^0.4.2"],
+  "files": [
+    { "path": "db/schema/auth.ts", "target": "db/schema/auth.ts", "type": "registry:file" },
+    { "path": "lib/auth/server.ts", "target": "lib/auth/server.ts", "type": "registry:file" },
+    { "path": "lib/auth/client.ts", "target": "lib/auth/client.ts", "type": "registry:file" }
+  ]
+}

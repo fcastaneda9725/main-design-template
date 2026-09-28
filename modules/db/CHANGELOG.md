@@ -38,3 +38,12 @@ Solo las dos primeras justifican interrumpir un proyecto que ya lo tiene instala
   puede parchear un archivo existente. `/main-design-add` debería automatizar
   esto cuando exista; hasta entonces es un paso manual documentado en
   `SKILL.md`.
+- **fix** (encontrado al construir `auth`, corregido antes de tener consumidores
+  reales — se ajusta esta misma v1 en vez de abrir una v2 sin motivo) el pin
+  original de `drizzle-orm@^0.44.7` (versión real de `zazpi`) es incompatible
+  con `better-auth`, que exige `drizzle-orm@^0.45.2` como peer dependency
+  cuando se usa `drizzleAdapter` — confirmado tanto por el `ERESOLVE` real de
+  npm como por el `package.json` de `solvo` (el único proyecto que combina
+  ambos), que fija `^0.45.2`. Subido a `^0.45.2`. Si un proyecto instala `db`
+  sin `auth`, esto no cambia nada observable — sigue siendo la misma API de
+  Drizzle que usa `zazpi`.

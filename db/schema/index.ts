@@ -4,7 +4,9 @@
 // reexportado aquí con `export * from "./<tabla>"`. Nunca definir una tabla
 // directamente en este archivo — es solo el barrel.
 //
-// Vacío a propósito: no se envía una tabla de ejemplo. Una tabla inventada
-// ("posts", "users" genérico) es más ruido que ayuda — se borra en el primer
-// commit real de cualquier proyecto. Empezar por la primera tabla de negocio.
-export {};
+// `auth.ts` es la única excepción a "una tabla por archivo": las 4 tablas de
+// better-auth (user/session/account/verification) se generan y regeneran
+// juntas con su CLI oficial — partirlas en 4 archivos serviría a la
+// convención, no a la realidad de cómo se mantienen (ver el comentario en
+// auth.ts).
+export * from "./auth";

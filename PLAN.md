@@ -356,7 +356,7 @@ se commitea.
 | `base` | — | ✅ **construido** | `env.ts` (Zod v4), `Result<T>`, código de referencia, `instrumentation.ts`, estados, `AGENTS.md` |
 | `tokens` | `zazpi` (maduro) | ✅ **construido** | generador + alias shadcn + test de drift |
 | `db` | 6 | ✅ **construido** | Neon + Drizzle (`neon-http`), un archivo por tabla |
-| `auth` | 5 | ✅ | better-auth + `drizzleAdapter`. Solo cableado |
+| `auth` | 5 | ✅ **construido** | better-auth + `drizzleAdapter`, `admin()`. Solo cableado |
 | `email` | 5 | ✅ | Resend + React Email, plantilla base bilingüe |
 | `payments` | 3 | — | interfaz `PaymentProvider` + stripe + mercadopago + transferencia manual |
 | `storage` | 3 | — | interfaz delgada, R2 + Vercel Blob, URLs firmadas |
@@ -532,14 +532,35 @@ main-design-template/
    - Requiere un paso manual (`DATABASE_URL` en `lib/env.ts`) que la copia de
      archivos del registro no puede automatizar — documentado como tarea de
      `/main-design-add` cuando exista.
-6. **`auth`** — **fusionar `solvo` + `landing-golf`**. Ninguno de los dos archivos es
-   el módulo por sí solo:
+6. ✅ **`auth`** — construido e integrado. **Fusión real de `solvo` +
+   `landing-golf`**, ninguno de los dos archivos era el módulo por sí solo:
 
    | De `solvo` | De `landing-golf` |
    |---|---|
-   | link directo al token: evita el iframe sandboxed de clientes de correo | capturar la URL de reset sin enviar email, para resets disparados por admin o webhook de Stripe |
+   | link directo al token: evita el iframe sandboxed de clientes de correo | capturar el link de reset sin enviar email, para resets disparados por admin o webhook |
 
-   Ambas cicatrices entran, y ambas se documentan en el `CHANGELOG` por síntoma.
+   Ambas cicatrices entran — y el fix del link directo se aplicó a **ambas**
+   rutas (email directo, captura admin), porque `landing-golf` lo tenía en una
+   sola y por eso el bug seguía vivo ahí. Documentado por síntoma en
+   `modules/auth/CHANGELOG.md`.
+
+   Hallazgos que no estaban anticipados:
+   - **Schema generado con la CLI oficial de better-auth**, no escrito a mano
+     — verificado con un `drizzle-kit generate` real (4 tablas, migración SQL
+     válida).
+   - **CVE real en la versión exacta que se iba a fijar**: `better-auth@1.6.20`
+     tiene un aviso de seguridad alto (`GHSA-qq9h-g4jm-xgf3`, pre-account
+     hijacking vía magic-link/email-OTP). Esta configuración no está expuesta
+     (no usa esos plugins), pero se subió a `1.6.22` de todas formas — dejar
+     fijado un CVE conocido expone a cualquier proyecto que agregue esos
+     plugins después.
+   - **Cascada de versiones**: `better-auth` exige `drizzle-orm@^0.45.2`, no
+     `^0.44.7` (lo que `db` había fijado desde `zazpi`) — corregido en
+     `modules/db`. Y `vitest@^2.1.0` chocaba con un peer opcional de
+     better-auth — subido a `^4.1.10`, la versión real que usa `solvo`.
+   - Verificado con dos casos negativos reales (quitar `BETTER_AUTH_SECRET`
+     rompe el build con el mensaje esperado; `db:generate` con el schema
+     instalado produce SQL válido), no solo el camino feliz.
 7. **`email`** — Resend + React Email, plantilla base bilingüe 600px sin depender de
    fuentes web.
 8. Las 4 skills (`D08`) + `marketplace.json`.

@@ -14,6 +14,8 @@ import { z } from "zod";
 const serverSchema = z.object({
   // kit: db@1
   DATABASE_URL: z.string().url(),
+  // kit: auth@1
+  BETTER_AUTH_SECRET: z.string().min(32, "Genera uno con: openssl rand -base64 32"),
 });
 
 const clientSchema = z.object({

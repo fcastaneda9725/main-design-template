@@ -5,7 +5,7 @@
   "title": "DB",
   "description": "Neon + Drizzle ORM, driver neon-http (verificado en producción incluso con auth). Convención de un archivo por tabla en db/schema/ con barrel export, drizzle.config.ts self-contained con su propio dotenv, y los scripts db:generate/db:migrate/db:studio. Requiere el módulo `base` (usa lib/env.ts) — DATABASE_URL se añade ahí a mano tras instalar, ver SKILL.md.",
   "registryDependencies": ["base"],
-  "dependencies": ["drizzle-orm@^0.44.7", "@neondatabase/serverless@^1.1.0"],
+  "dependencies": ["drizzle-orm@^0.45.2", "@neondatabase/serverless@^1.1.0"],
   "devDependencies": ["drizzle-kit@^0.31.11", "dotenv@^17.4.2"],
   "files": [
     { "path": "db/index.ts", "target": "db/index.ts", "type": "registry:file" },
