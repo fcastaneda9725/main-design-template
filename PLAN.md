@@ -355,7 +355,7 @@ se commitea.
 |---|---|---|---|
 | `base` | — | ✅ **construido** | `env.ts` (Zod v4), `Result<T>`, código de referencia, `instrumentation.ts`, estados, `AGENTS.md` |
 | `tokens` | `zazpi` (maduro) | ✅ **construido** | generador + alias shadcn + test de drift |
-| `db` | 6 | ✅ | Neon + Drizzle + `drizzle.config.ts` |
+| `db` | 6 | ✅ **construido** | Neon + Drizzle (`neon-http`), un archivo por tabla |
 | `auth` | 5 | ✅ | better-auth + `drizzleAdapter`. Solo cableado |
 | `email` | 5 | ✅ | Resend + React Email, plantilla base bilingüe |
 | `payments` | 3 | — | interfaz `PaymentProvider` + stripe + mercadopago + transferencia manual |
@@ -513,8 +513,25 @@ main-design-template/
    `D02`), `AGENTS.md` fusionado con el bloque autogenerado de Next (`D04`).
    `npm run build` + `tsc --noEmit` limpios sobre el conjunto completo
    (scaffold + tokens + base), no solo cada módulo por separado.
-5. **`db`** — Neon + Drizzle + `drizzle.config.ts` + convención de un archivo por
-   tabla en `db/schema/`.
+5. ✅ **`db`** — construido e integrado. Neon + Drizzle, driver `neon-http`,
+   `drizzle.config.ts` con `dotenv` propio, un archivo por tabla en
+   `db/schema/` (barrel vacío a propósito, sin tabla de ejemplo). Decisiones
+   con evidencia a favor y en contra documentadas honestamente en
+   `modules/db/CHANGELOG.md`:
+   - **Driver `neon-http`, no Pool/sesión** — funciona con better-auth en
+     `solvo` en producción; la precaución de `zazpi` sobre necesitar el driver
+     de sesión para auth no se sostuvo.
+   - **Un archivo por tabla, no un monolito** — aunque `solvo` (41 tablas,
+     el proyecto más grande auditado) usa un único `schema.ts` de 1026 líneas
+     y funciona; no se adoptó porque su migración real corre por Supabase CLI,
+     no `drizzle-kit` — es un proyecto a medio migrar, no el estado limpio.
+   - Verificado con un caso negativo real, no solo el camino feliz: se quitó
+     `DATABASE_URL` de `.env.local` con algo importando `db` y el build falló
+     con el mensaje esperado de `lib/env.ts` — confirma que `base`+`db` fallan
+     rápido de verdad.
+   - Requiere un paso manual (`DATABASE_URL` en `lib/env.ts`) que la copia de
+     archivos del registro no puede automatizar — documentado como tarea de
+     `/main-design-add` cuando exista.
 6. **`auth`** — **fusionar `solvo` + `landing-golf`**. Ninguno de los dos archivos es
    el módulo por sí solo:
 

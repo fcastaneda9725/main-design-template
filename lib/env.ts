@@ -12,8 +12,8 @@
 import { z } from "zod";
 
 const serverSchema = z.object({
-  // Ejemplo de cómo un módulo futuro se engancha aquí:
-  // DATABASE_URL: z.string().url(),
+  // kit: db@1
+  DATABASE_URL: z.string().url(),
 });
 
 const clientSchema = z.object({
