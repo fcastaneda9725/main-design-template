@@ -9,6 +9,7 @@
   "files": [
     { "path": "db/schema/auth.ts", "target": "db/schema/auth.ts", "type": "registry:file" },
     { "path": "lib/auth/server.ts", "target": "lib/auth/server.ts", "type": "registry:file" },
-    { "path": "lib/auth/client.ts", "target": "lib/auth/client.ts", "type": "registry:file" }
+    { "path": "lib/auth/client.ts", "target": "lib/auth/client.ts", "type": "registry:file" },
+    { "path": "modules/auth/SKILL.md", "target": ".claude/skills/auth/SKILL.md", "type": "registry:file" }
   ]
 }

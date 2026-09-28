@@ -10,6 +10,7 @@
   "files": [
     { "path": "db/index.ts", "target": "db/index.ts", "type": "registry:file" },
     { "path": "db/schema/index.ts", "target": "db/schema/index.ts", "type": "registry:file" },
-    { "path": "drizzle.config.ts", "target": "drizzle.config.ts", "type": "registry:file" }
+    { "path": "drizzle.config.ts", "target": "drizzle.config.ts", "type": "registry:file" },
+    { "path": "modules/db/SKILL.md", "target": ".claude/skills/db/SKILL.md", "type": "registry:file" }
   ]
 }

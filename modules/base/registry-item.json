@@ -15,6 +15,7 @@
     { "path": "components/states/error-state.tsx", "target": "components/states/error-state.tsx", "type": "registry:component" },
     { "path": "components/states/forbidden-state.tsx", "target": "components/states/forbidden-state.tsx", "type": "registry:component" },
     { "path": "app/error.tsx", "target": "app/error.tsx", "type": "registry:page" },
-    { "path": "AGENTS.md", "target": "AGENTS.md", "type": "registry:file" }
+    { "path": "AGENTS.md", "target": "AGENTS.md", "type": "registry:file" },
+    { "path": "modules/base/SKILL.md", "target": ".claude/skills/base/SKILL.md", "type": "registry:file" }
   ]
 }

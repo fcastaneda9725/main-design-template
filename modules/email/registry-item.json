@@ -9,6 +9,7 @@
   "files": [
     { "path": "lib/email/server.ts", "target": "lib/email/server.ts", "type": "registry:file" },
     { "path": "emails/base-layout.tsx", "target": "emails/base-layout.tsx", "type": "registry:file" },
-    { "path": "emails/reset-password.tsx", "target": "emails/reset-password.tsx", "type": "registry:file" }
+    { "path": "emails/reset-password.tsx", "target": "emails/reset-password.tsx", "type": "registry:file" },
+    { "path": "modules/email/SKILL.md", "target": ".claude/skills/email/SKILL.md", "type": "registry:file" }
   ]
 }

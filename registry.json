@@ -1,0 +1,226 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "main-design-template",
+  "homepage": "https://main-design-template.vercel.app",
+  "items": [
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "auth",
+      "type": "registry:base",
+      "title": "Auth",
+      "description": "better-auth + drizzleAdapter, solo cableado (sin UI de login/registro — eso depende de la marca). Email+password con el plugin admin() para roles. sendResetPassword construye el link directo con el token crudo, no la URL de better-auth, para evitar que quede atrapado en el frame sandboxed de clientes de correo. Requiere `db`. El envío real del correo de reset es un stub hasta que se instale `email`.",
+      "registryDependencies": [
+        "db"
+      ],
+      "dependencies": [
+        "better-auth@1.6.22",
+        "@better-auth/utils@^0.4.2"
+      ],
+      "files": [
+        {
+          "path": "db/schema/auth.ts",
+          "target": "db/schema/auth.ts",
+          "type": "registry:file"
+        },
+        {
+          "path": "lib/auth/server.ts",
+          "target": "lib/auth/server.ts",
+          "type": "registry:file"
+        },
+        {
+          "path": "lib/auth/client.ts",
+          "target": "lib/auth/client.ts",
+          "type": "registry:file"
+        },
+        {
+          "path": "modules/auth/SKILL.md",
+          "target": ".claude/skills/auth/SKILL.md",
+          "type": "registry:file"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "base",
+      "type": "registry:base",
+      "title": "Base",
+      "description": "Núcleo invariante de todo proyecto: env.ts con Zod, tipo Result<T>, código de referencia determinista para errores, captura de errores de servidor (instrumentation.ts), los tres estados obligatorios de vista (vacío/error/sin permisos) y AGENTS.md con las convenciones del kit más encabezados TODO(proyecto) para lo específico del cliente. No trae cn() — lo instala `shadcn init` — ni hornea paleta, eso es el módulo `theme-<cliente>`.",
+      "dependencies": [
+        "zod@^4",
+        "nanoid"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "lib/result.ts",
+          "target": "lib/result.ts",
+          "type": "registry:file"
+        },
+        {
+          "path": "lib/env.ts",
+          "target": "lib/env.ts",
+          "type": "registry:file"
+        },
+        {
+          "path": "lib/errors/reference-code.ts",
+          "target": "lib/errors/reference-code.ts",
+          "type": "registry:file"
+        },
+        {
+          "path": "instrumentation.ts",
+          "target": "instrumentation.ts",
+          "type": "registry:file"
+        },
+        {
+          "path": "components/states/empty-state.tsx",
+          "target": "components/states/empty-state.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/states/error-state.tsx",
+          "target": "components/states/error-state.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/states/forbidden-state.tsx",
+          "target": "components/states/forbidden-state.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "app/error.tsx",
+          "target": "app/error.tsx",
+          "type": "registry:page"
+        },
+        {
+          "path": "AGENTS.md",
+          "target": "AGENTS.md",
+          "type": "registry:file"
+        },
+        {
+          "path": "modules/base/SKILL.md",
+          "target": ".claude/skills/base/SKILL.md",
+          "type": "registry:file"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "db",
+      "type": "registry:base",
+      "title": "DB",
+      "description": "Neon + Drizzle ORM, driver neon-http (verificado en producción incluso con auth). Convención de un archivo por tabla en db/schema/ con barrel export, drizzle.config.ts self-contained con su propio dotenv, y los scripts db:generate/db:migrate/db:studio. Requiere el módulo `base` (usa lib/env.ts) — DATABASE_URL se añade ahí a mano tras instalar, ver SKILL.md.",
+      "registryDependencies": [
+        "base"
+      ],
+      "dependencies": [
+        "drizzle-orm@^0.45.2",
+        "@neondatabase/serverless@^1.1.0"
+      ],
+      "devDependencies": [
+        "drizzle-kit@^0.31.11",
+        "dotenv@^17.4.2"
+      ],
+      "files": [
+        {
+          "path": "db/index.ts",
+          "target": "db/index.ts",
+          "type": "registry:file"
+        },
+        {
+          "path": "db/schema/index.ts",
+          "target": "db/schema/index.ts",
+          "type": "registry:file"
+        },
+        {
+          "path": "drizzle.config.ts",
+          "target": "drizzle.config.ts",
+          "type": "registry:file"
+        },
+        {
+          "path": "modules/db/SKILL.md",
+          "target": ".claude/skills/db/SKILL.md",
+          "type": "registry:file"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "email",
+      "type": "registry:base",
+      "title": "Email",
+      "description": "Resend + React Email. sendEmail() envuelve resend.emails.send() con el chequeo de {data,error} que Resend nunca lanza en fallos de la API. BaseEmailLayout lee design-system/tokens.json directo (color.paper.*), no CSS — los clientes de correo no soportan var(--...) de forma confiable. Incluye ResetPasswordEmail y conecta el stub de sendResetPasswordEmail en lib/auth/server.ts si `auth` está instalado.",
+      "registryDependencies": [],
+      "dependencies": [
+        "resend@^4.8.0",
+        "react-email@6.11.0",
+        "server-only@^0.0.1"
+      ],
+      "files": [
+        {
+          "path": "lib/email/server.ts",
+          "target": "lib/email/server.ts",
+          "type": "registry:file"
+        },
+        {
+          "path": "emails/base-layout.tsx",
+          "target": "emails/base-layout.tsx",
+          "type": "registry:file"
+        },
+        {
+          "path": "emails/reset-password.tsx",
+          "target": "emails/reset-password.tsx",
+          "type": "registry:file"
+        },
+        {
+          "path": "modules/email/SKILL.md",
+          "target": ".claude/skills/email/SKILL.md",
+          "type": "registry:file"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "tokens",
+      "type": "registry:base",
+      "title": "Tokens",
+      "description": "Generador de design tokens (D09/D10): design-system/tokens.json es la fuente única, agnóstica de plataforma. Emite styles/tokens.css con los tokens propios, una capa de alias de shadcn derivada (nunca al revés), y un reset de la paleta y radios por defecto de Tailwind. Incluye el test de drift que falla si el CSS commiteado no coincide con lo que generaría el script hoy.",
+      "devDependencies": [
+        "vitest"
+      ],
+      "files": [
+        {
+          "path": "design-system/tokens.json",
+          "target": "design-system/tokens.json",
+          "type": "registry:file"
+        },
+        {
+          "path": "scripts/generate-tokens.mjs",
+          "target": "scripts/generate-tokens.mjs",
+          "type": "registry:file"
+        },
+        {
+          "path": "scripts/lib/build-tokens-css.mjs",
+          "target": "scripts/lib/build-tokens-css.mjs",
+          "type": "registry:file"
+        },
+        {
+          "path": "styles/tokens.css",
+          "target": "styles/tokens.css",
+          "type": "registry:file"
+        },
+        {
+          "path": "tests/tokens.test.ts",
+          "target": "tests/tokens.test.ts",
+          "type": "registry:file"
+        },
+        {
+          "path": "modules/tokens/SKILL.md",
+          "target": ".claude/skills/tokens/SKILL.md",
+          "type": "registry:file"
+        }
+      ]
+    }
+  ]
+}

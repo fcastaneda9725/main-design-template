@@ -1,0 +1,14 @@
+{
+  "name": "main-design",
+  "description": "Registro privado de shadcn + skills de Claude Code para operar el kit main-design (ver PLAN.md).",
+  "owner": {
+    "name": "fcastaneda9726"
+  },
+  "plugins": [
+    {
+      "name": "main-design",
+      "source": "./plugins/main-design",
+      "description": "Skills para operar el kit main-design (main-design-start, -add, -extract, -audit) — ver PLAN.md en la raíz del repo."
+    }
+  ]
+}

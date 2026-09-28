@@ -1,0 +1,10 @@
+{
+  "name": "main-design",
+  "version": "0.1.0",
+  "description": "Skills para operar el kit main-design: arrancar proyectos, instalar módulos, extraer código real como módulo nuevo, y auditar deriva de versión.",
+  "homepage": "https://main-design-template.vercel.app",
+  "author": {
+    "name": "fcastaneda9726"
+  },
+  "license": "UNLICENSED"
+}

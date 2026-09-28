@@ -135,6 +135,28 @@ central en tus proyectos.
 Clerk (`tdm-coach`) y next-auth (`insignia`, `media-vip`) quedan como heredados. No se
 soportan en el kit.
 
+**Verificado con un caso real, no solo la auditoría original (2026-09-28):** al migrar
+el login de `insignia` de magic link a contraseña (problema real: gateways corporativos
+de correo — Defender Safe Links, Proofpoint, Mimecast — auto-abren los enlaces para
+escanearlos y consumen el token de un solo uso antes de que el usuario haga clic),
+`npx shadcn add @main/auth` **no era viable directamente**: `insignia` usa Prisma +
+`pg`, no Drizzle — el bloqueo real no es "next-auth vs. better-auth", es el ORM. El
+módulo `db` (D06: Drizzle+Neon directo, sin interfaz) arrastra esa dependencia a
+`auth` vía `registryDependencies`, así que ningún proyecto Prisma puede instalar
+`auth` tal cual sin migrar de ORM primero — algo que nadie pidió y que habría sido un
+cambio mucho más grande que el problema real.
+
+La migración se hizo a mano, portando el **patrón** (email+contraseña, recuperación
+asistida por admin en vez de autoservicio por correo, token de un solo uso que no se
+consume en el GET — mismo principio que evita el bug del iframe sandboxed que motivó
+`D05`) sin usar el registro. Confirma que `D06` fue la decisión correcta (no vale la
+pena una interfaz de ORM con una sola variante real observada), y dice algo nuevo: si
+`better-auth` alguna vez necesita soportar un segundo proyecto real en Prisma, la
+vía es su propio `prismaAdapter` (existe, no se investigó a fondo aquí) — pero eso
+espera a que haya una segunda señal real del portafolio, no se construye ahora
+(regla de proceso: `/main-design-extract` desde código que ya funcionó, nunca por
+adelantado).
+
 ### D06 — Abstrae solo donde hay variación observada
 | Módulo | ¿Interfaz? | Razón |
 |---|---|---|
@@ -326,7 +348,7 @@ Tres condiciones que hacen que funcione:
 {
   "registries": {
     "main": {
-      "url": "https://<host>/r/{name}.json",
+      "url": "https://main-design-template.vercel.app/r/{name}.json",
       "headers": { "Authorization": "Bearer ${REGISTRY_TOKEN}" }
     }
   }
@@ -585,9 +607,68 @@ main-design-template/
    Con esto, **los 5 módulos de la primera ronda están construidos**
    (`tokens`, `base`, `db`, `auth`, `email`). Sigue la tarea 10: validar en un
    proyecto real antes de agregar cualquier módulo nuevo.
-8. Las 4 skills (`D08`) + `marketplace.json`.
-9. Publicar en Vercel con `REGISTRY_TOKEN`.
-10. **Validar en el siguiente proyecto real**, no antes de eso.
+8. ✅ **Las 4 skills (`D08`) + `marketplace.json`.** Construidas como plugin de
+   Claude Code: `.claude-plugin/marketplace.json` (raíz) →
+   `plugins/main-design/.claude-plugin/plugin.json` →
+   `plugins/main-design/skills/main-design-{start,add,extract,audit}/SKILL.md`.
+   Validado con `claude plugin validate .` (pasa sin warnings). Funciona igual
+   en sesiones locales que en Claude Code en la nube — un plugin no depende de
+   dónde corre la sesión, solo de que el marketplace esté agregado ahí.
+
+   Al escribir `main-design-add`/`-audit` apareció un gap real en los 5
+   módulos ya construidos: ningún `registry-item.json` incluía su propio
+   `SKILL.md` en `files`, así que instalar un módulo nunca habría dejado
+   `.claude/skills/<módulo>/SKILL.md` en el proyecto destino — rompía la
+   promesa de `D08` Tipo 2 en silencio. Corregido en los 5 antes de seguir
+   (cada uno ahora copia su `SKILL.md` a `.claude/skills/<módulo>/SKILL.md`).
+
+   También se agregó `scripts/build-registry.mjs` (ensambla `registry.json`
+   desde `modules/*/registry-item.json` — sin segunda fuente de verdad, mismo
+   patrón que `tokens.css` generado desde `tokens.json`) y el script npm
+   `registry:build`. Verificado con `npx shadcn build` real: los 5 módulos
+   compilan a `public/r/*.json`, confirmado que el `SKILL.md` de `auth` queda
+   embebido con el `target` correcto. `npm run build` + `tsc --noEmit` +
+   `npm run test` limpios sobre el repo completo después del cambio.
+
+   Pendiente, no resuelto aquí: el mecanismo de marca de versión (`D12`,
+   `// kit: <módulo>@vN · <hash> · <fecha>`) depende de que `main-design-add`
+   y `main-design-audit` puedan leer `modules/<módulo>/CHANGELOG.md` del kit
+   — hoy solo funciona con el repo del kit disponible localmente, porque la
+   tarea 1 (repo en GitHub) sigue sin hacerse. Documentado como tal en ambas
+   skills, no se inventó una URL.
+9. ✅ **Publicado en Vercel con `REGISTRY_TOKEN`.** Proyecto
+   `main-design-template` creado en el equipo Vercel del usuario y desplegado
+   a producción: `https://main-design-template.vercel.app`. `REGISTRY_TOKEN`
+   vive como env var `Sensitive` de Producción en el proyecto de Vercel — no
+   literal en ningún archivo, no visible después de creado.
+
+   **Gap de seguridad real encontrado y cerrado antes de publicar:** el
+   registro es estático (`public/r/*.json`, servido por Vercel sin más), así
+   que sin nada adicional el `Authorization: Bearer ${REGISTRY_TOKEN}` de
+   `D13` habría sido decorativo — cualquiera con la URL habría podido leer
+   `/r/*.json` sin token. Se agregó `proxy.ts` en la raíz (Next.js 16 renombró
+   `middleware.ts` → `proxy.ts`, se siguió esa convención desde el warning
+   real del build) que responde `401` sin el header correcto y `500` si
+   `REGISTRY_TOKEN` no está configurado en el entorno — nunca "abierto por
+   defecto". Verificado con servidor real (`next start`) y luego contra la
+   URL de producción: sin header → `401`, header correcto → `200` en los 5
+   módulos, header incorrecto → `401`.
+
+   Confirmado que desplegar este repo **no** requiere las credenciales reales
+   de `db`/`auth`/`email` (`DATABASE_URL`, `BETTER_AUTH_SECRET`,
+   `RESEND_API_KEY`, `EMAIL_FROM`) — build real probado sin esas variables:
+   pasa limpio, porque hoy nada en `app/` importa esos módulos en build time.
+   Si eso cambia (una página de referencia empieza a usar `db`/`auth`), la
+   tarea 9 tendría que revisarse — hoy no aplica.
+10. **Validar en el siguiente proyecto real**, no antes de eso. **Parcial, no
+    cerrada:** `insignia` (2026-09-28, ver addendum en `D05`) no sirvió para validar
+    el pipeline en sí (`npx shadcn add @main/<módulo>`, skills instalando
+    `.claude/skills/<módulo>/SKILL.md`) — es un proyecto Prisma, incompatible con
+    `db`/`auth` por diseño (D06). Sirvió para validar algo distinto y también
+    valioso: que las *decisiones* del kit (D05, D06, el patrón de token de un solo
+    uso que no se consume en el GET) siguen siendo correctas fuera del kit. Sigue
+    pendiente probar el pipeline completo — instalar un módulo de verdad con
+    `npx shadcn add @main/<módulo>` — en un proyecto Next.js + Drizzle real.
 
 ---
 
@@ -607,7 +688,6 @@ Hallazgos de la auditoría que no son del kit pero conviene arreglar:
 
 ## 10. No decidido
 
-- Host y dominio del registro.
 - Formato exacto de `CHANGELOG.md` (¿legible por la skill de auditoría, o texto libre?).
 - Si `theme-<cliente>` se distribuye como ítem `registry:base` o como preset de shadcn.
 - Cuándo, si alguna vez, se crea `kit-expo` (`D07`).
