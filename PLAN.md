@@ -477,7 +477,8 @@ main-design-template/
 
 ## 8. Primera ronda — tareas concretas
 
-1. ✅ `git init`. Falta: repo en GitHub (privado).
+1. ✅ `git init` + repo privado en GitHub:
+   `https://github.com/fcastaneda9725/main-design-template` (2026-10-04).
 2. ✅ **Cerrado.** `npx shadcn@latest init --template next -d --base radix -n
    main-design-template` (en scratch, luego movido a la raíz sin anidar — `init`
    crea una subcarpeta con el nombre del proyecto, incluso si coincide con el
