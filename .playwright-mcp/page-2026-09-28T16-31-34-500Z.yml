@@ -1,0 +1,87 @@
+- generic [active] [ref=f8e1]:
+  - generic [ref=f8e2]:
+    - banner [ref=f8e3]:
+      - generic [ref=f8e4]:
+        - link [ref=f8e5] [cursor=pointer]:
+          - /url: /
+          - img "Insignia de Oro LATAM" [ref=f8e7]
+        - navigation "Navegación principal" [ref=f8e8]:
+          - link "Inicio" [ref=f8e9] [cursor=pointer]:
+            - /url: /
+          - link "Categorías" [ref=f8e10] [cursor=pointer]:
+            - /url: /categorias
+          - link "Postular" [ref=f8e11] [cursor=pointer]:
+            - /url: /postular
+          - link "Jurado" [ref=f8e12] [cursor=pointer]:
+            - /url: /comite
+          - link "Patrocinadores" [ref=f8e13] [cursor=pointer]:
+            - /url: /patrocinar
+        - generic [ref=f8e14]:
+          - link "Inicia Sesión" [ref=f8e15] [cursor=pointer]:
+            - /url: /login
+          - generic [ref=f8e16]:
+            - link "Instagram" [ref=f8e17] [cursor=pointer]:
+              - /url: https://www.instagram.com/oficial_insigniadeoro/
+            - link "LinkedIn" [ref=f8e20] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/insignia-de-oro/
+    - main [ref=f8e23]:
+      - generic [ref=f8e107]:
+        - heading "BIENVENIDO A INSIGNIA DE ORO" [level=1] [ref=f8e108]
+        - paragraph [ref=f8e109]: Continua para completar tus datos
+        - link "CONTINUAR" [ref=f8e110] [cursor=pointer]:
+          - /url: /dashboard/perfil
+    - contentinfo [ref=f8e44]:
+      - generic [ref=f8e46]:
+        - img "Insignia de Oro" [ref=f8e49]
+        - list [ref=f8e51]:
+          - listitem [ref=f8e52]:
+            - link "INICIO" [ref=f8e53] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=f8e54]:
+            - link "CATEGORIAS" [ref=f8e55] [cursor=pointer]:
+              - /url: /categorias
+          - listitem [ref=f8e56]:
+            - link "POSTULAR" [ref=f8e57] [cursor=pointer]:
+              - /url: /postular
+          - listitem [ref=f8e58]:
+            - link "COMITÉ" [ref=f8e59] [cursor=pointer]:
+              - /url: /comite
+          - listitem [ref=f8e60]:
+            - link "PATROCINADORES" [ref=f8e61] [cursor=pointer]:
+              - /url: /patrocinar
+          - listitem [ref=f8e62]:
+            - link "FAQ" [ref=f8e63] [cursor=pointer]:
+              - /url: /faq
+        - generic [ref=f8e64]:
+          - generic [ref=f8e65]:
+            - generic [ref=f8e66]:
+              - generic [ref=f8e67]: Lima, Perú
+              - link "T. +51 965 408 330" [ref=f8e68] [cursor=pointer]:
+                - /url: https://wa.me/51965408330
+            - generic [ref=f8e69]:
+              - generic [ref=f8e70]: CDMX, México
+              - link "T. +51 939 654 907" [ref=f8e71] [cursor=pointer]:
+                - /url: https://wa.me/51939654907
+            - generic [ref=f8e73]:
+              - text: M.
+              - link "info@insigniadeoro.com" [ref=f8e74] [cursor=pointer]:
+                - /url: mailto:info@insigniadeoro.com
+          - generic [ref=f8e75]:
+            - link "Instagram" [ref=f8e76] [cursor=pointer]:
+              - /url: https://www.instagram.com/oficial_insigniadeoro/
+            - link "LinkedIn" [ref=f8e79] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/insignia-de-oro/
+      - generic [ref=f8e85]:
+        - generic [ref=f8e86]: Desarrollado por CATARSIS ETA®
+        - generic [ref=f8e87]: /
+        - generic [ref=f8e88]: Todos los derechos © INSIGNIA DE ORO®
+        - generic [ref=f8e89]: /
+        - link "Aviso de privacidad" [ref=f8e90] [cursor=pointer]:
+          - /url: /legal/aviso-privacidad.pdf
+        - generic [ref=f8e91]: /
+        - link "Términos y condiciones" [ref=f8e92] [cursor=pointer]:
+          - /url: /legal/terminos-uso-sitio.pdf
+    - link "Contactar por WhatsApp" [ref=f8e93] [cursor=pointer]:
+      - /url: https://wa.me/51939654907
+  - button "Open Next.js Dev Tools" [ref=f8e101] [cursor=pointer]
+  - alert [ref=f8e105]: Bienvenido — Insignia de Oro LATAM

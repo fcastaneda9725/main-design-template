@@ -1,0 +1,137 @@
+- generic [active] [ref=f7e1]:
+  - generic [ref=f7e2]:
+    - banner [ref=f7e3]:
+      - generic [ref=f7e4]:
+        - link [ref=f7e5] [cursor=pointer]:
+          - /url: /
+          - img "Insignia de Oro LATAM" [ref=f7e7]
+        - navigation "Navegación principal" [ref=f7e8]:
+          - link "Inicio" [ref=f7e9] [cursor=pointer]:
+            - /url: /
+          - link "Categorías" [ref=f7e10] [cursor=pointer]:
+            - /url: /categorias
+          - link "Postular" [ref=f7e11] [cursor=pointer]:
+            - /url: /postular
+          - link "Jurado" [ref=f7e12] [cursor=pointer]:
+            - /url: /comite
+          - link "Patrocinadores" [ref=f7e13] [cursor=pointer]:
+            - /url: /patrocinar
+        - generic [ref=f7e14]:
+          - link "Inicia Sesión" [ref=f7e15] [cursor=pointer]:
+            - /url: /login
+          - generic [ref=f7e16]:
+            - link "Instagram" [ref=f7e17] [cursor=pointer]:
+              - /url: https://www.instagram.com/oficial_insigniadeoro/
+            - link "LinkedIn" [ref=f7e20] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/insignia-de-oro/
+    - main [ref=f7e23]:
+      - generic [ref=f7e25]:
+        - generic [ref=f7e26]: LA GRAN NOCHE ESTA CERCA
+        - generic [ref=f7e27]:
+          - generic [ref=f7e28]: 61 d
+          - generic [ref=f7e29]: "|"
+          - generic [ref=f7e30]: 09 h
+          - generic [ref=f7e31]: "|"
+          - generic [ref=f7e32]: 28 m
+          - generic [ref=f7e33]: "|"
+          - generic [ref=f7e34]: 40 s
+      - generic [ref=f7e38]:
+        - heading "CELEBRANDO LAS MEJORES ESTRATEGIAS DE LEALTAD 2026" [level=1] [ref=f7e40]
+        - img "Insignia de Oro" [ref=f7e43]
+      - generic [ref=f7e46]:
+        - heading "BIENVENIDO A INSIGNIA DE ORO" [level=2] [ref=f7e48]
+        - paragraph [ref=f7e50]: El único premio en Latinoamérica que reconoce la excelencia en programas de lealtad. El galardón que marca el estándar en el sector y celebra a los más destacados de la región.
+      - generic [ref=f7e52]:
+        - heading "FECHAS CLAVE 2026" [level=2] [ref=f7e53]
+        - generic [ref=f7e57]:
+          - generic [ref=f7e62]:
+            - heading "POSTULACIONES ABIERTAS" [level=3] [ref=f7e63]
+            - paragraph [ref=f7e64]: 15 de julio
+          - generic [ref=f7e69]:
+            - heading "CIERRE DE POSTULACIONES" [level=3] [ref=f7e70]
+            - paragraph [ref=f7e71]: 30 de septiembre
+          - generic [ref=f7e76]:
+            - heading "ANUNCIO DE FINALISTAS" [level=3] [ref=f7e77]
+            - paragraph [ref=f7e78]: 15 de octubre
+          - generic [ref=f7e83]:
+            - heading "EVALUACIÓN FINAL DEL JURADO" [level=3] [ref=f7e84]
+            - paragraph [ref=f7e85]: 30 de octubre
+          - generic [ref=f7e90]:
+            - heading "GALA DE PREMIACIÓN" [level=3] [ref=f7e91]
+            - paragraph [ref=f7e92]: Noviembre (fecha por anunciar)
+        - generic [ref=f7e93]:
+          - link "POSTULAR" [ref=f7e94] [cursor=pointer]:
+            - /url: /registro
+          - link "PATROCINAR" [ref=f7e95] [cursor=pointer]:
+            - /url: /patrocinar
+        - paragraph [ref=f7e97]: ¡Postula tu programa de lealtad y sé parte de los únicos galardones de la industria en Latinoamérica!
+      - generic [ref=f7e99]:
+        - heading "¿POR QUÉ PARTICIPAR?" [level=2] [ref=f7e101]
+        - generic [ref=f7e102]:
+          - generic [ref=f7e103]:
+            - img "RECONOCIMIENTO" [ref=f7e105]
+            - heading "RECONOCIMIENTO" [level=3] [ref=f7e106]
+            - paragraph [ref=f7e107]: Reconoce y celebra a tu equipo y su impacto.
+          - generic [ref=f7e108]:
+            - img "CONEXIÓN" [ref=f7e110]
+            - heading "CONEXIÓN" [level=3] [ref=f7e111]
+            - paragraph [ref=f7e112]: Conecta con tus colegas de la industria latinoamericana.
+          - generic [ref=f7e113]:
+            - img "EXCELENCIA" [ref=f7e115]
+            - heading "EXCELENCIA" [level=3] [ref=f7e116]
+            - paragraph [ref=f7e117]: Contribuye a impulsar una comunidad de crecimiento profesional.
+    - contentinfo [ref=f7e118]:
+      - generic [ref=f7e120]:
+        - img "Insignia de Oro" [ref=f7e123]
+        - list [ref=f7e125]:
+          - listitem [ref=f7e126]:
+            - link "INICIO" [ref=f7e127] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=f7e128]:
+            - link "CATEGORIAS" [ref=f7e129] [cursor=pointer]:
+              - /url: /categorias
+          - listitem [ref=f7e130]:
+            - link "POSTULAR" [ref=f7e131] [cursor=pointer]:
+              - /url: /postular
+          - listitem [ref=f7e132]:
+            - link "COMITÉ" [ref=f7e133] [cursor=pointer]:
+              - /url: /comite
+          - listitem [ref=f7e134]:
+            - link "PATROCINADORES" [ref=f7e135] [cursor=pointer]:
+              - /url: /patrocinar
+          - listitem [ref=f7e136]:
+            - link "FAQ" [ref=f7e137] [cursor=pointer]:
+              - /url: /faq
+        - generic [ref=f7e138]:
+          - generic [ref=f7e139]:
+            - generic [ref=f7e140]:
+              - generic [ref=f7e141]: Lima, Perú
+              - link "T. +51 965 408 330" [ref=f7e142] [cursor=pointer]:
+                - /url: https://wa.me/51965408330
+            - generic [ref=f7e143]:
+              - generic [ref=f7e144]: CDMX, México
+              - link "T. +51 939 654 907" [ref=f7e145] [cursor=pointer]:
+                - /url: https://wa.me/51939654907
+            - generic [ref=f7e147]:
+              - text: M.
+              - link "info@insigniadeoro.com" [ref=f7e148] [cursor=pointer]:
+                - /url: mailto:info@insigniadeoro.com
+          - generic [ref=f7e149]:
+            - link "Instagram" [ref=f7e150] [cursor=pointer]:
+              - /url: https://www.instagram.com/oficial_insigniadeoro/
+            - link "LinkedIn" [ref=f7e153] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/insignia-de-oro/
+      - generic [ref=f7e159]:
+        - generic [ref=f7e160]: Desarrollado por CATARSIS ETA®
+        - generic [ref=f7e161]: /
+        - generic [ref=f7e162]: Todos los derechos © INSIGNIA DE ORO®
+        - generic [ref=f7e163]: /
+        - link "Aviso de privacidad" [ref=f7e164] [cursor=pointer]:
+          - /url: /legal/aviso-privacidad.pdf
+        - generic [ref=f7e165]: /
+        - link "Términos y condiciones" [ref=f7e166] [cursor=pointer]:
+          - /url: /legal/terminos-uso-sitio.pdf
+    - link "Contactar por WhatsApp" [ref=f7e167] [cursor=pointer]:
+      - /url: https://wa.me/51939654907
+  - button "Open Next.js Dev Tools" [ref=f7e175] [cursor=pointer]
+  - alert [ref=f7e179]

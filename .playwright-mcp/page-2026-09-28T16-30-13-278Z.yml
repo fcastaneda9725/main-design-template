@@ -1,0 +1,88 @@
+- generic [active] [ref=f2e1]:
+  - generic [ref=f2e2]:
+    - banner [ref=f2e3]:
+      - generic [ref=f2e4]:
+        - link [ref=f2e5] [cursor=pointer]:
+          - /url: /
+          - img "Insignia de Oro LATAM" [ref=f2e7]
+        - navigation "Navegación principal" [ref=f2e8]:
+          - link "Inicio" [ref=f2e9] [cursor=pointer]:
+            - /url: /
+          - link "Categorías" [ref=f2e10] [cursor=pointer]:
+            - /url: /categorias
+          - link "Postular" [ref=f2e11] [cursor=pointer]:
+            - /url: /postular
+          - link "Jurado" [ref=f2e12] [cursor=pointer]:
+            - /url: /comite
+          - link "Patrocinadores" [ref=f2e13] [cursor=pointer]:
+            - /url: /patrocinar
+        - generic [ref=f2e14]:
+          - link "Inicia Sesión" [ref=f2e15] [cursor=pointer]:
+            - /url: /login
+          - generic [ref=f2e16]:
+            - link "Instagram" [ref=f2e17] [cursor=pointer]:
+              - /url: https://www.instagram.com/oficial_insigniadeoro/
+            - link "LinkedIn" [ref=f2e20] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/insignia-de-oro/
+    - main [ref=f2e23]:
+      - generic [ref=f2e25]:
+        - heading "CREA TU CONTRASEÑA" [level=1] [ref=f2e27]
+        - generic [ref=f2e28]:
+          - paragraph [ref=f2e29]: Este enlace ya no es válido. Solicita uno nuevo desde la pantalla de inicio de sesión.
+          - link "IR A INICIAR SESIÓN" [ref=f2e30] [cursor=pointer]:
+            - /url: /login
+    - contentinfo [ref=f2e31]:
+      - generic [ref=f2e33]:
+        - img "Insignia de Oro" [ref=f2e36]
+        - list [ref=f2e38]:
+          - listitem [ref=f2e39]:
+            - link "INICIO" [ref=f2e40] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=f2e41]:
+            - link "CATEGORIAS" [ref=f2e42] [cursor=pointer]:
+              - /url: /categorias
+          - listitem [ref=f2e43]:
+            - link "POSTULAR" [ref=f2e44] [cursor=pointer]:
+              - /url: /postular
+          - listitem [ref=f2e45]:
+            - link "COMITÉ" [ref=f2e46] [cursor=pointer]:
+              - /url: /comite
+          - listitem [ref=f2e47]:
+            - link "PATROCINADORES" [ref=f2e48] [cursor=pointer]:
+              - /url: /patrocinar
+          - listitem [ref=f2e49]:
+            - link "FAQ" [ref=f2e50] [cursor=pointer]:
+              - /url: /faq
+        - generic [ref=f2e51]:
+          - generic [ref=f2e52]:
+            - generic [ref=f2e53]:
+              - generic [ref=f2e54]: Lima, Perú
+              - link "T. +51 965 408 330" [ref=f2e55] [cursor=pointer]:
+                - /url: https://wa.me/51965408330
+            - generic [ref=f2e56]:
+              - generic [ref=f2e57]: CDMX, México
+              - link "T. +51 939 654 907" [ref=f2e58] [cursor=pointer]:
+                - /url: https://wa.me/51939654907
+            - generic [ref=f2e60]:
+              - text: M.
+              - link "info@insigniadeoro.com" [ref=f2e61] [cursor=pointer]:
+                - /url: mailto:info@insigniadeoro.com
+          - generic [ref=f2e62]:
+            - link "Instagram" [ref=f2e63] [cursor=pointer]:
+              - /url: https://www.instagram.com/oficial_insigniadeoro/
+            - link "LinkedIn" [ref=f2e66] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/insignia-de-oro/
+      - generic [ref=f2e72]:
+        - generic [ref=f2e73]: Desarrollado por CATARSIS ETA®
+        - generic [ref=f2e74]: /
+        - generic [ref=f2e75]: Todos los derechos © INSIGNIA DE ORO®
+        - generic [ref=f2e76]: /
+        - link "Aviso de privacidad" [ref=f2e77] [cursor=pointer]:
+          - /url: /legal/aviso-privacidad.pdf
+        - generic [ref=f2e78]: /
+        - link "Términos y condiciones" [ref=f2e79] [cursor=pointer]:
+          - /url: /legal/terminos-uso-sitio.pdf
+    - link "Contactar por WhatsApp" [ref=f2e80] [cursor=pointer]:
+      - /url: https://wa.me/51939654907
+  - button "Open Next.js Dev Tools" [ref=f2e88] [cursor=pointer]
+  - alert [ref=f2e92]

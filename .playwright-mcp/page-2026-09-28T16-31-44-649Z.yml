@@ -1,0 +1,365 @@
+- generic [active] [ref=f9e1]:
+  - generic [ref=f9e2]:
+    - banner [ref=f9e3]:
+      - generic [ref=f9e4]:
+        - link [ref=f9e5] [cursor=pointer]:
+          - /url: /dashboard
+          - img "Insignia de Oro LATAM" [ref=f9e7]
+        - navigation "Navegación del panel" [ref=f9e8]:
+          - link "Mis Postulaciones" [ref=f9e9] [cursor=pointer]:
+            - /url: /dashboard
+          - link "Mis Datos" [ref=f9e10] [cursor=pointer]:
+            - /url: /dashboard/perfil
+        - button "Cerrar Sesión" [ref=f9e12] [cursor=pointer]
+    - generic [ref=f9e15]:
+      - generic [ref=f9e16]:
+        - heading "COMPLETA TUS DATOS" [level=1] [ref=f9e17]
+        - paragraph [ref=f9e18]: Estás a un paso de terminar tu registro.
+      - generic [ref=f9e19]:
+        - generic [ref=f9e20]:
+          - textbox "Empresa" [ref=f9e21]
+          - textbox "Cargo" [ref=f9e22]
+          - combobox [ref=f9e23] [cursor=pointer]:
+            - option "Región" [disabled] [selected]
+            - option "México"
+            - option "Belice"
+            - option "Guatemala"
+            - option "El Salvador"
+            - option "Honduras"
+            - option "Nicaragua"
+            - option "Costa Rica"
+            - option "Panamá"
+            - option "Cuba"
+            - option "República Dominicana"
+            - option "Haití"
+            - option "Jamaica"
+            - option "Bahamas"
+            - option "Barbados"
+            - option "Trinidad y Tobago"
+            - option "Granada"
+            - option "Dominica"
+            - option "Santa Lucía"
+            - option "San Vicente y las Granadinas"
+            - option "Antigua y Barbuda"
+            - option "San Cristóbal y Nieves"
+            - option "Puerto Rico"
+            - option "Colombia"
+            - option "Venezuela"
+            - option "Guyana"
+            - option "Surinam"
+            - option "Ecuador"
+            - option "Perú"
+            - option "Bolivia"
+            - option "Brasil"
+            - option "Paraguay"
+            - option "Chile"
+            - option "Argentina"
+            - option "Uruguay"
+            - option "Otro"
+          - generic [ref=f9e25]:
+            - combobox "Phone number country" [ref=f9e27] [cursor=pointer]:
+              - option "International"
+              - option "Afghanistan"
+              - option "Åland Islands"
+              - option "Albania"
+              - option "Algeria"
+              - option "American Samoa"
+              - option "Andorra"
+              - option "Angola"
+              - option "Anguilla"
+              - option "Antigua and Barbuda"
+              - option "Argentina"
+              - option "Armenia"
+              - option "Aruba"
+              - option "Ascension Island"
+              - option "Australia"
+              - option "Austria"
+              - option "Azerbaijan"
+              - option "Bahamas"
+              - option "Bahrain"
+              - option "Bangladesh"
+              - option "Barbados"
+              - option "Belarus"
+              - option "Belgium"
+              - option "Belize"
+              - option "Benin"
+              - option "Bermuda"
+              - option "Bhutan"
+              - option "Bolivia"
+              - option "Bonaire, Sint Eustatius and Saba"
+              - option "Bosnia and Herzegovina"
+              - option "Botswana"
+              - option "Brazil"
+              - option "British Indian Ocean Territory"
+              - option "Brunei Darussalam"
+              - option "Bulgaria"
+              - option "Burkina Faso"
+              - option "Burundi"
+              - option "Cambodia"
+              - option "Cameroon"
+              - option "Canada"
+              - option "Cape Verde"
+              - option "Cayman Islands"
+              - option "Central African Republic"
+              - option "Chad"
+              - option "Chile"
+              - option "China"
+              - option "Christmas Island"
+              - option "Cocos (Keeling) Islands"
+              - option "Colombia"
+              - option "Comoros"
+              - option "Congo"
+              - option "Congo, Democratic Republic of the"
+              - option "Cook Islands"
+              - option "Costa Rica"
+              - option "Cote d'Ivoire"
+              - option "Croatia"
+              - option "Cuba"
+              - option "Curaçao"
+              - option "Cyprus"
+              - option "Czech Republic"
+              - option "Denmark"
+              - option "Djibouti"
+              - option "Dominica"
+              - option "Dominican Republic"
+              - option "Ecuador"
+              - option "Egypt"
+              - option "El Salvador"
+              - option "Equatorial Guinea"
+              - option "Eritrea"
+              - option "Estonia"
+              - option "Ethiopia"
+              - option "Falkland Islands"
+              - option "Faroe Islands"
+              - option "Federated States of Micronesia"
+              - option "Fiji"
+              - option "Finland"
+              - option "France"
+              - option "French Guiana"
+              - option "French Polynesia"
+              - option "Gabon"
+              - option "Gambia"
+              - option "Georgia"
+              - option "Germany"
+              - option "Ghana"
+              - option "Gibraltar"
+              - option "Greece"
+              - option "Greenland"
+              - option "Grenada"
+              - option "Guadeloupe"
+              - option "Guam"
+              - option "Guatemala"
+              - option "Guernsey"
+              - option "Guinea"
+              - option "Guinea-Bissau"
+              - option "Guyana"
+              - option "Haiti"
+              - option "Holy See (Vatican City State)"
+              - option "Honduras"
+              - option "Hong Kong"
+              - option "Hungary"
+              - option "Iceland"
+              - option "India"
+              - option "Indonesia"
+              - option "Iran"
+              - option "Iraq"
+              - option "Ireland"
+              - option "Isle of Man"
+              - option "Israel"
+              - option "Italy"
+              - option "Jamaica"
+              - option "Japan"
+              - option "Jersey"
+              - option "Jordan"
+              - option "Kazakhstan"
+              - option "Kenya"
+              - option "Kiribati"
+              - option "Kosovo"
+              - option "Kuwait"
+              - option "Kyrgyzstan"
+              - option "Laos"
+              - option "Latvia"
+              - option "Lebanon"
+              - option "Lesotho"
+              - option "Liberia"
+              - option "Libya"
+              - option "Liechtenstein"
+              - option "Lithuania"
+              - option "Luxembourg"
+              - option "Macao"
+              - option "Madagascar"
+              - option "Malawi"
+              - option "Malaysia"
+              - option "Maldives"
+              - option "Mali"
+              - option "Malta"
+              - option "Marshall Islands"
+              - option "Martinique"
+              - option "Mauritania"
+              - option "Mauritius"
+              - option "Mayotte"
+              - option "Mexico"
+              - option "Moldova"
+              - option "Monaco"
+              - option "Mongolia"
+              - option "Montenegro"
+              - option "Montserrat"
+              - option "Morocco"
+              - option "Mozambique"
+              - option "Myanmar"
+              - option "Namibia"
+              - option "Nauru"
+              - option "Nepal"
+              - option "Netherlands"
+              - option "New Caledonia"
+              - option "New Zealand"
+              - option "Nicaragua"
+              - option "Niger"
+              - option "Nigeria"
+              - option "Niue"
+              - option "Norfolk Island"
+              - option "North Korea"
+              - option "North Macedonia"
+              - option "Northern Mariana Islands"
+              - option "Norway"
+              - option "Oman"
+              - option "Pakistan"
+              - option "Palau"
+              - option "Palestine"
+              - option "Panama"
+              - option "Papua New Guinea"
+              - option "Paraguay"
+              - option "Peru" [selected]
+              - option "Philippines"
+              - option "Poland"
+              - option "Portugal"
+              - option "Puerto Rico"
+              - option "Qatar"
+              - option "Reunion"
+              - option "Romania"
+              - option "Russia"
+              - option "Rwanda"
+              - option "Saint Barthélemy"
+              - option "Saint Helena"
+              - option "Saint Kitts and Nevis"
+              - option "Saint Lucia"
+              - option "Saint Martin (French Part)"
+              - option "Saint Pierre and Miquelon"
+              - option "Saint Vincent and the Grenadines"
+              - option "Samoa"
+              - option "San Marino"
+              - option "Sao Tome and Principe"
+              - option "Saudi Arabia"
+              - option "Senegal"
+              - option "Serbia"
+              - option "Seychelles"
+              - option "Sierra Leone"
+              - option "Singapore"
+              - option "Sint Maarten"
+              - option "Slovakia"
+              - option "Slovenia"
+              - option "Solomon Islands"
+              - option "Somalia"
+              - option "South Africa"
+              - option "South Korea"
+              - option "South Sudan"
+              - option "Spain"
+              - option "Sri Lanka"
+              - option "Sudan"
+              - option "Suriname"
+              - option "Svalbard and Jan Mayen"
+              - option "Swaziland"
+              - option "Sweden"
+              - option "Switzerland"
+              - option "Syria"
+              - option "Taiwan"
+              - option "Tajikistan"
+              - option "Tanzania"
+              - option "Thailand"
+              - option "Timor-Leste"
+              - option "Togo"
+              - option "Tokelau"
+              - option "Tonga"
+              - option "Trinidad and Tobago"
+              - option "Tristan da Cunha"
+              - option "Tunisia"
+              - option "Turkey"
+              - option "Turkmenistan"
+              - option "Turks and Caicos Islands"
+              - option "Tuvalu"
+              - option "Uganda"
+              - option "Ukraine"
+              - option "United Arab Emirates"
+              - option "United Kingdom"
+              - option "United States"
+              - option "Uruguay"
+              - option "Uzbekistan"
+              - option "Vanuatu"
+              - option "Venezuela"
+              - option "Vietnam"
+              - option "Virgin Islands, British"
+              - option "Virgin Islands, U.S."
+              - option "Wallis and Futuna"
+              - option "Western Sahara"
+              - option "Yemen"
+              - option "Zambia"
+              - option "Zimbabwe"
+            - textbox "Teléfono" [ref=f9e31]: "+51"
+        - combobox [ref=f9e32] [cursor=pointer]:
+          - option "Participante" [disabled] [selected]
+          - option "Marca dueña de programa, estrategia o campaña postulante"
+          - option "Agencia, consultor o partner tecnológico"
+        - textbox "Correo alternativo (opcional, para recuperar acceso)" [ref=f9e33]
+        - button "CONTINUAR" [ref=f9e35] [cursor=pointer]
+    - contentinfo [ref=f9e36]:
+      - generic [ref=f9e38]:
+        - img "Insignia de Oro" [ref=f9e41]
+        - list [ref=f9e43]:
+          - listitem [ref=f9e44]:
+            - link "INICIO" [ref=f9e45] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=f9e46]:
+            - link "CATEGORIAS" [ref=f9e47] [cursor=pointer]:
+              - /url: /categorias
+          - listitem [ref=f9e48]:
+            - link "POSTULAR" [ref=f9e49] [cursor=pointer]:
+              - /url: /postular
+          - listitem [ref=f9e50]:
+            - link "COMITÉ" [ref=f9e51] [cursor=pointer]:
+              - /url: /comite
+          - listitem [ref=f9e52]:
+            - link "PATROCINADORES" [ref=f9e53] [cursor=pointer]:
+              - /url: /patrocinar
+          - listitem [ref=f9e54]:
+            - link "FAQ" [ref=f9e55] [cursor=pointer]:
+              - /url: /faq
+        - generic [ref=f9e56]:
+          - generic [ref=f9e57]:
+            - generic [ref=f9e58]:
+              - generic [ref=f9e59]: Lima, Perú
+              - link "T. +51 965 408 330" [ref=f9e60] [cursor=pointer]:
+                - /url: https://wa.me/51965408330
+            - generic [ref=f9e61]:
+              - generic [ref=f9e62]: CDMX, México
+              - link "T. +51 939 654 907" [ref=f9e63] [cursor=pointer]:
+                - /url: https://wa.me/51939654907
+            - generic [ref=f9e65]:
+              - text: M.
+              - link "info@insigniadeoro.com" [ref=f9e66] [cursor=pointer]:
+                - /url: mailto:info@insigniadeoro.com
+          - generic [ref=f9e67]:
+            - link "Instagram" [ref=f9e68] [cursor=pointer]:
+              - /url: https://www.instagram.com/oficial_insigniadeoro/
+            - link "LinkedIn" [ref=f9e71] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/insignia-de-oro/
+      - generic [ref=f9e77]:
+        - generic [ref=f9e78]: Desarrollado por CATARSIS ETA®
+        - generic [ref=f9e79]: /
+        - generic [ref=f9e80]: Todos los derechos © INSIGNIA DE ORO®
+        - generic [ref=f9e81]: /
+        - link "Aviso de privacidad" [ref=f9e82] [cursor=pointer]:
+          - /url: /legal/aviso-privacidad.pdf
+        - generic [ref=f9e83]: /
+        - link "Términos y condiciones" [ref=f9e84] [cursor=pointer]:
+          - /url: /legal/terminos-uso-sitio.pdf
+  - button "Open Next.js Dev Tools" [ref=f9e90] [cursor=pointer]
